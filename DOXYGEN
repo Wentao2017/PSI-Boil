@@ -1,0 +1,37 @@
+------------------------------------------------------------------------------
+15.04.2008.
+
+I have to decide how to insert doxygen documentation.
+
+Generally, I think the following order could be adopted:
+
+1 - brief description,
+2 - parameters,
+3 - detailed description.
+
+It remains to be decided where to place all of these, into
+header files, or in the source files.
+
+I might try to follow these guidelines:
+
+1 - if function is defined in header, then there is no
+    doubt, everything has to be defined in the header.
+
+2 - if function is defined in the source, I might do the
+   
+2.1. public functions:
+
+     - brief description in the header
+
+     - parameters in header for construtord,
+       preferably in the header for other functions
+
+     - detailed descriptions in the source
+
+2.2. private/protected: everything in the source. 
+
+3 - for functions in children, descriptions can be done in
+    parent ... hmm ... not sure yet.
+
+These rules can not be followed strictly. For some instances
+header files might become to large and clumsy.

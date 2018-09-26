@@ -1,0 +1,8 @@
+rect.o: rect.cpp /usr/include/stdc-predef.h rect.h \
+ ../Global/global_precision.h
+
+/usr/include/stdc-predef.h:
+
+rect.h:
+
+../Global/global_precision.h:

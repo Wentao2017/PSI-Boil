@@ -1,0 +1,5 @@
+global_endl.o: global_endl.cpp /usr/include/stdc-predef.h global_endl.h
+
+/usr/include/stdc-predef.h:
+
+global_endl.h:

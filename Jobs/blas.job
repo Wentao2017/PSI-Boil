@@ -1,0 +1,9 @@
+#PBS -N b_l_a_s
+#PBS -l size=1
+#PBS -l walltime=00:10:00
+
+cd /users/bniceno/Development/PSI-Boil
+
+export IOBUF_PARAMS='*:verbose'
+
+yod -np all blas B

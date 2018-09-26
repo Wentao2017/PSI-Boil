@@ -1,0 +1,80 @@
+06. + VERY IMPORTANT!!! Decide on the strategy on how to deal 
+      with multiple materials. There are several options.
+
+      06.1. Define separate domains and variables in each of 
+            them
+
+      06.2. Define one domain, but then define variables (and
+            solvers) only on parts of the domains. Maybe, in
+            that case, variables should hold a local sub-grid
+            on which you define MG, for example.
+
+            Maybe like this: start with domain, define sub-domains
+            for different materials (retaining communication patterns)
+            and then define each variable for a domain (again
+            retaining patterns).
+
+      Think how different variables can deal with parallelisation.
+      They might be decomposed in different patterns. 
+
+      -> This has been achieved with "Obstacle" inside the domain and
+         by removing MG (MultiGrid) from the code. All variables span
+         throug all materials and the systems are coarsened inside the
+         Additive correction algorithm.
+
+07. + Move dim[3] array to be the member of the domain. 
+------------------------------------------------------------------------------
+On 17.11.2007., after a very long break in updating this document:
+
+08. + Introduce timer, as a global object.
+
+09. + Average times over processors. To achieve it, introduce something like 
+      average() in communicator.
+
+10. - Make some sort of check if all timers are stopped.
+
+11. + Move Pressure/pressure_create_system.cpp back to parent.
+
+12. + Introduce namespace "boil" for oout, aout, endl, timer, cart.
+      (Actually, all global objects will begin with boil::)
+      -> This slowed down the program by some 10-20% !!!
+
+13. + Create Krylov as a parent of CG. It wil be a framework for other solvers.
+      -> This seemed to have slowed down the program by some 10-20% !!!
+
+      To cancel changes with namespace(s) and CG, I sould go back to revision 
+      REMOVED_MG
+
+NOTE: Steps 12. and/or 13. seem to have slowed the program down. That was not
+      the case, tough, the code was slowed down by separete compileation of 
+      Solver, Preconditioner and Krylov functions. Once they were put in the
+      same library, the code was running as fast as before.
+
+      Update of the note: none of this seems to make sense, execution times 
+      vary quite unpredictably. The code did not slow down.
+------------------------------------------------------------------------------
+7.12.2007.
+
+14. + Parellize randomizer (Vector::add)
+
+15. - Extend Vector:add for other directions
+
+16. + Make connect work with different materials.
+------------------------------------------------------------------------------
+15.04.2008.
+
+17. - Place get_src from Momentum to Pressure.
+------------------------------------------------------------------------------
+22.09.2008.
+
+18. - Write a nice and small tutorial for users.
+------------------------------------------------------------------------------
+12.10.2008.
+
+19. - WHY DOESN'T Momentum::new_time_step CALL THE DISCRETIZATION????
+------------------------------------------------------------------------------
+21.11.2008.
+
+20. + Normalize residuals in Krylov sub-space solvers (smoothers) with
+      something, the max value of variable is a good choice!
+      (Quite frankly, only the printouts are normalized).
