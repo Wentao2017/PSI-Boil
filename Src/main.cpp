@@ -118,24 +118,13 @@ main(int argc, char * argv[]) {
   c.exchange();
   boil::plot->plot(uvw,c, "uvw-c-init0", 0);
 
-  /*----------------------+
-  |  physical properties  |
-  +----------------------*/
-  Matter air(d), water(d);
-  air  .mu    (1.0000e-5);
-  air  .rho   (1.1768e+0);
-  water.mu    (1.0000e-3);
-  water.rho   (1.0000e+3);
-
-  //Matter mixed(air, water, c);
-  Matter mixed(water, air, c);
 
   /*----------------+
   |  linear solver  |
   +----------------*/
   Krylov * solver = new CG(d, Prec::di());
 
-  CIPCSL2 conc  (c, g, kappa, uvw, time, solver);
+  VOF conc  (c, g, kappa, 1.0, 1.0, uvw, time, solver);
 #if 1
   std::ofstream fout0;
   fout0.open("init-profile.txt");
@@ -159,11 +148,12 @@ main(int argc, char * argv[]) {
     /*---------------------------+
     |  fully explicit with conc  |
     +---------------------------*/
-    conc.new_time_step();
+   // new_time_step();
+    conc.plic_advance();
     //conc.convection();
-    conc.advance();
+    //conc.advance();
     //conc.sharpen();
-    conc.totalvol();
+    //conc.totalvol();
 
     if(time.current_step() % nint == 0) {
       boil::plot->plot(uvw, c, "uvw-c",  time.current_step());
@@ -190,4 +180,3 @@ main(int argc, char * argv[]) {
 /*-----------------------------------------------------------------------------+
  '$Id: main-CIPCSL2-1d.cpp,v 1.3 2018/09/26 10:06:18 sato Exp $'/
 +-----------------------------------------------------------------------------*/
-/*commit*/

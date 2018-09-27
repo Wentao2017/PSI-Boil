@@ -60,7 +60,7 @@ VOF::VOF(const Scalar & PHI,
   alloc3d(& iflag, phi.ni(), phi.nj(), phi.nk());
 
   discretize();
-  init();
+//  init();
 }	
 
 /******************************************************************************/

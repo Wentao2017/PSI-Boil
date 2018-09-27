@@ -8,6 +8,6 @@ libVof_a_SOURCES = vof.h                 \
                         vof_gradphi.cpp  \
                         vof_insert_bc.cpp     \
                         vof_tension.cpp       \
-                        vof_totalvol.cpp
-
+                        vof_totalvol.cpp     \
+                        vof_plic_advance.cpp 
 INCLUDE = -I@top_srcdir@/

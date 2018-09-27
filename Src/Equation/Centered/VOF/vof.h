@@ -29,6 +29,7 @@ class VOF : public Centered {
     void totalvol();
     void front_minmax();
     void init();
+    void plic_advance();
 
     // getter for front_minmax
     real get_xminft() { return(xminft);};

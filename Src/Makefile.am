@@ -65,7 +65,7 @@ LDADD = Equation/Staggered/Momentum/libMomentum.a          \
         Equation/Centered/ColorCIP/libColorCIP.a           \
         Equation/Centered/CIPCSL2/libCipcsl2.a             \
         Equation/Centered/Distance/libDistance.a           \
-        Equation/Centered/Distance/libVof.a                \
+        Equation/Centered/VOF/libVof.a                \
         Equation/Centered/libCentered.a                    \
         Equation/Dispersed/libDispersed.a                  \
         Equation/Floodfill/libFloodfill.a                  \

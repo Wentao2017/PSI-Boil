@@ -100,7 +100,7 @@ am_libVof_a_OBJECTS = vof.$(OBJEXT) vof_advance.$(OBJEXT) \
 	vof_bdcurv.$(OBJEXT) vof_curv.$(OBJEXT) \
 	vof_front_minmax.$(OBJEXT) vof_gradphi.$(OBJEXT) \
 	vof_insert_bc.$(OBJEXT) vof_tension.$(OBJEXT) \
-	vof_totalvol.$(OBJEXT)
+	vof_totalvol.$(OBJEXT) vof_plic_advance.$(OBJEXT)
 libVof_a_OBJECTS = $(am_libVof_a_OBJECTS)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
@@ -170,12 +170,12 @@ am__define_uniq_tagged_files = \
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/missing aclocal-1.13
+ACLOCAL = ${SHELL} /gpfs/data/guo_w/Development/PSI-Boil/missing aclocal-1.13
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AUTOCONF = ${SHELL} /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/missing autoconf
-AUTOHEADER = ${SHELL} /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/missing autoheader
-AUTOMAKE = ${SHELL} /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/missing automake-1.13
+AUTOCONF = ${SHELL} /gpfs/data/guo_w/Development/PSI-Boil/missing autoconf
+AUTOHEADER = ${SHELL} /gpfs/data/guo_w/Development/PSI-Boil/missing autoheader
+AUTOMAKE = ${SHELL} /gpfs/data/guo_w/Development/PSI-Boil/missing automake-1.13
 AWK = gawk
 CC = mpicc
 CCDEPMODE = depmode=gcc3
@@ -200,7 +200,7 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/missing makeinfo
+MAKEINFO = ${SHELL} /gpfs/data/guo_w/Development/PSI-Boil/missing makeinfo
 MKDIR_P = /usr/bin/mkdir -p
 OBJEXT = o
 PACKAGE = PSI-Boil
@@ -216,10 +216,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = 
 VERSION = 0.3
-abs_builddir = /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/Src/Equation/Centered/VOF
-abs_srcdir = /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/Src/Equation/Centered/VOF
-abs_top_builddir = /gpfs/home/guo_w/Development/PSI-Boil-2018-0926
-abs_top_srcdir = /gpfs/home/guo_w/Development/PSI-Boil-2018-0926
+abs_builddir = /gpfs/data/guo_w/Development/PSI-Boil/Src/Equation/Centered/VOF
+abs_srcdir = /gpfs/data/guo_w/Development/PSI-Boil/Src/Equation/Centered/VOF
+abs_top_builddir = /gpfs/data/guo_w/Development/PSI-Boil
+abs_top_srcdir = /gpfs/data/guo_w/Development/PSI-Boil
 ac_ct_CC = mpicc
 ac_ct_CXX = 
 am__include = include
@@ -239,7 +239,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/install-sh
+install_sh = ${SHELL} /gpfs/data/guo_w/Development/PSI-Boil/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -269,7 +269,8 @@ libVof_a_SOURCES = vof.h                 \
                         vof_gradphi.cpp  \
                         vof_insert_bc.cpp     \
                         vof_tension.cpp       \
-                        vof_totalvol.cpp
+                        vof_totalvol.cpp     \
+                        vof_plic_advance.cpp 
 
 INCLUDE = -I../../../../
 all: all-am
@@ -328,6 +329,7 @@ include ./$(DEPDIR)/vof_curv.Po
 include ./$(DEPDIR)/vof_front_minmax.Po
 include ./$(DEPDIR)/vof_gradphi.Po
 include ./$(DEPDIR)/vof_insert_bc.Po
+include ./$(DEPDIR)/vof_plic_advance.Po
 include ./$(DEPDIR)/vof_tension.Po
 include ./$(DEPDIR)/vof_totalvol.Po
 

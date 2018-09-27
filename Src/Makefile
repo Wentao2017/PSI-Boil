@@ -106,8 +106,7 @@ Boil_DEPENDENCIES = Equation/Staggered/Momentum/libMomentum.a \
 	Equation/Centered/ColorCIP/libColorCIP.a \
 	Equation/Centered/CIPCSL2/libCipcsl2.a \
 	Equation/Centered/Distance/libDistance.a \
-	Equation/Centered/VOF/libVof.a \
-	Equation/Centered/libCentered.a \
+	Equation/Centered/VOF/libVof.a Equation/Centered/libCentered.a \
 	Equation/Dispersed/libDispersed.a \
 	Equation/Floodfill/libFloodfill.a Monitor/Rack/libRack.a \
 	Monitor/Location/libLocation.a Matter/libMatter.a \
@@ -233,12 +232,12 @@ am__relativize = \
     dir1=`echo "$$dir1" | sed -e "$$sed_rest"`; \
   done; \
   reldir="$$dir2"
-ACLOCAL = ${SHELL} /gpfs/data/guo_w/Development/PSI-Boil/missing aclocal-1.13
+ACLOCAL = ${SHELL} /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/missing aclocal-1.13
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AUTOCONF = ${SHELL} /gpfs/data/guo_w/Development/PSI-Boil/missing autoconf
-AUTOHEADER = ${SHELL} /gpfs/data/guo_w/Development/PSI-Boil/missing autoheader
-AUTOMAKE = ${SHELL} /gpfs/data/guo_w/Development/PSI-Boil/missing automake-1.13
+AUTOCONF = ${SHELL} /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/missing autoconf
+AUTOHEADER = ${SHELL} /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/missing autoheader
+AUTOMAKE = ${SHELL} /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/missing automake-1.13
 AWK = gawk
 CC = mpicc
 CCDEPMODE = depmode=gcc3
@@ -263,7 +262,7 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /gpfs/data/guo_w/Development/PSI-Boil/missing makeinfo
+MAKEINFO = ${SHELL} /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/missing makeinfo
 MKDIR_P = /usr/bin/mkdir -p
 OBJEXT = o
 PACKAGE = PSI-Boil
@@ -279,10 +278,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = 
 VERSION = 0.3
-abs_builddir = /gpfs/data/guo_w/Development/PSI-Boil/Src
-abs_srcdir = /gpfs/data/guo_w/Development/PSI-Boil/Src
-abs_top_builddir = /gpfs/data/guo_w/Development/PSI-Boil
-abs_top_srcdir = /gpfs/data/guo_w/Development/PSI-Boil
+abs_builddir = /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/Src
+abs_srcdir = /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/Src
+abs_top_builddir = /gpfs/home/guo_w/Development/PSI-Boil-2018-0926
+abs_top_srcdir = /gpfs/home/guo_w/Development/PSI-Boil-2018-0926
 ac_ct_CC = mpicc
 ac_ct_CXX = 
 am__include = include
@@ -302,7 +301,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /gpfs/data/guo_w/Development/PSI-Boil/install-sh
+install_sh = ${SHELL} /gpfs/home/guo_w/Development/PSI-Boil-2018-0926/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
