@@ -39,7 +39,7 @@ main(int argc, char * argv[]) {
   /*-------------------+
   |  time-integration  |
   +-------------------*/
-  const int  ndt = 500;
+  const int  ndt = 10000;
   //const int ndt = 1;
   const int nint = 50;
   const real dt  = 0.25 * LX / real(NX);
@@ -104,7 +104,7 @@ main(int argc, char * argv[]) {
 
 #if 1
   for_vijk(c,i,j,k) {
-    if( 0.10 < c.xc(i) && c.xc(i) < 0.20 ){
+    if( 0.10 < c.xc(i) && c.xc(i) < 0.15 ){
           c[i][j][k]=1.0;
     }
   }

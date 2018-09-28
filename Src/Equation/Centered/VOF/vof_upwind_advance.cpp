@@ -37,13 +37,13 @@ for_ijk(i,j,k){
   // std::cout<< clr[80][1][1] <<"\n";
 /* Flux */
     mc = Comp::u();
-    fluxx = phi[i][j][k] * (*u)[mc][i+1][j][k] * dtdx - phi[i-1][j][k] * (*u)[mc][i][j][k] * dtdx;
+    fluxx = phi[i][j][k] * (*u)[mc][i+1][j][k]  - phi[i-1][j][k] * (*u)[mc][i][j][k];
     
     mc = Comp::v();
-    fluxy = phi[i][j][k] * (*u)[mc][i][j+1][k] * dtdy - phi[i][j-1][k] * (*u)[mc][i][j][k] * dtdy;
+    fluxy = phi[i][j][k] * (*u)[mc][i][j+1][k]  - phi[i][j-1][k] * (*u)[mc][i][j][k];
 
     mc = Comp::w();
-    fluxz = phi[i][j][k] * (*u)[mc][i][j][k+1] * dtdz - phi[i][j][k-1] * (*u)[mc][i][j][k] * dtdz;
+    fluxz = phi[i][j][k] * (*u)[mc][i][j][k+1]  - phi[i][j][k-1] * (*u)[mc][i][j][k];
 
 /* update clr */
 
@@ -62,7 +62,8 @@ for_ijk(i,j,k){
     phi.bnd_update();
     phi.exchange_all();
 
-    std::cout<< phi[80][1][1] <<"\n";
+      std::cout<< dt <<" "<<dx <<"\n";
+//    std::cout<< phi[80][1][1] <<"\n";
 
  /********************************************************+
  |              Final treatment                           |
