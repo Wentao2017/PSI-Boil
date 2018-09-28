@@ -100,7 +100,7 @@ am_libVof_a_OBJECTS = vof.$(OBJEXT) vof_advance.$(OBJEXT) \
 	vof_bdcurv.$(OBJEXT) vof_curv.$(OBJEXT) \
 	vof_front_minmax.$(OBJEXT) vof_gradphi.$(OBJEXT) \
 	vof_insert_bc.$(OBJEXT) vof_tension.$(OBJEXT) \
-	vof_totalvol.$(OBJEXT) vof_plic_advance.$(OBJEXT)
+	vof_totalvol.$(OBJEXT) vof_upwind_advance.$(OBJEXT)
 libVof_a_OBJECTS = $(am_libVof_a_OBJECTS)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
@@ -270,7 +270,7 @@ libVof_a_SOURCES = vof.h                 \
                         vof_insert_bc.cpp     \
                         vof_tension.cpp       \
                         vof_totalvol.cpp     \
-                        vof_plic_advance.cpp 
+                        vof_upwind_advance.cpp 
 
 INCLUDE = -I../../../../
 all: all-am
@@ -329,9 +329,9 @@ include ./$(DEPDIR)/vof_curv.Po
 include ./$(DEPDIR)/vof_front_minmax.Po
 include ./$(DEPDIR)/vof_gradphi.Po
 include ./$(DEPDIR)/vof_insert_bc.Po
-include ./$(DEPDIR)/vof_plic_advance.Po
 include ./$(DEPDIR)/vof_tension.Po
 include ./$(DEPDIR)/vof_totalvol.Po
+include ./$(DEPDIR)/vof_upwind_advance.Po
 
 .cpp.o:
 	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

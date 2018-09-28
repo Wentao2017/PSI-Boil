@@ -116,6 +116,7 @@ main(int argc, char * argv[]) {
 #endif
   
   c.exchange();
+  c.bnd_update();
   boil::plot->plot(uvw,c, "uvw-c-init0", 0);
 
 
@@ -149,7 +150,7 @@ main(int argc, char * argv[]) {
     |  fully explicit with conc  |
     +---------------------------*/
    // new_time_step();
-    conc.plic_advance();
+    conc.upwind_advance();
     //conc.convection();
     //conc.advance();
     //conc.sharpen();
@@ -165,7 +166,7 @@ main(int argc, char * argv[]) {
   std::ofstream fout;
   fout.open("profile.txt");
   for_vi(c,i) {
-       fout << c.xc(i) << "  " << g[i][1][1] << "\n";
+       fout << c.xc(i) << "  " << c[i][1][1] << "\n";
   }
   fout.close();
   return 0;
