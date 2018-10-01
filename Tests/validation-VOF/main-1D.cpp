@@ -39,7 +39,7 @@ main(int argc, char * argv[]) {
   /*-------------------+
   |  time-integration  |
   +-------------------*/
-  const int  ndt = 500;
+  const int  ndt = 10000;
   //const int ndt = 1;
   const int nint = 50;
   const real dt  = 0.25 * LX / real(NX);
@@ -104,7 +104,7 @@ main(int argc, char * argv[]) {
 
 #if 1
   for_vijk(c,i,j,k) {
-    if( 0.10 < c.xc(i) && c.xc(i) < 0.20 ){
+    if( 0.10 < c.xc(i) && c.xc(i) < 0.15 ){
           c[i][j][k]=1.0;
     }
   }
@@ -116,6 +116,7 @@ main(int argc, char * argv[]) {
 #endif
   
   c.exchange();
+  c.bnd_update();
   boil::plot->plot(uvw,c, "uvw-c-init0", 0);
 
 
@@ -148,8 +149,8 @@ main(int argc, char * argv[]) {
     /*---------------------------+
     |  fully explicit with conc  |
     +---------------------------*/
-    new_time_step();
-    conc.1d_plic_advance();
+   // new_time_step();
+    conc.upwind_advance();
     //conc.convection();
     //conc.advance();
     //conc.sharpen();
@@ -165,7 +166,7 @@ main(int argc, char * argv[]) {
   std::ofstream fout;
   fout.open("profile.txt");
   for_vi(c,i) {
-       fout << c.xc(i) << "  " << g[i][1][1] << "\n";
+       fout << c.xc(i) << "  " << c[i][1][1] << "\n";
   }
   fout.close();
   return 0;

@@ -9,5 +9,10 @@ libVof_a_SOURCES = vof.h                 \
                         vof_insert_bc.cpp     \
                         vof_tension.cpp       \
                         vof_totalvol.cpp     \
-                        vof_upwind_advance.cpp 
+                        vof_upwind_advance.cpp \
+                        vof_gradphic.cpp      \
+                        vof_insert_bc_gradphic.cpp \
+                        vof_insert_bc_norm.cpp \
+                        vof_normalize.cpp                        
+
 INCLUDE = -I@top_srcdir@/

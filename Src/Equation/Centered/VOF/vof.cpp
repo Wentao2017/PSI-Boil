@@ -57,6 +57,9 @@ VOF::VOF(const Scalar & PHI,
 
   epsnorm=1.0e-12;
 
+/* set initial value */
+  nlayer=16;
+
   alloc3d(& iflag, phi.ni(), phi.nj(), phi.nk());
 
   discretize();
