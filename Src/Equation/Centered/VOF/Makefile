@@ -102,7 +102,8 @@ am_libVof_a_OBJECTS = vof.$(OBJEXT) vof_advance.$(OBJEXT) \
 	vof_insert_bc.$(OBJEXT) vof_tension.$(OBJEXT) \
 	vof_totalvol.$(OBJEXT) vof_upwind_advance.$(OBJEXT) \
 	vof_gradphic.$(OBJEXT) vof_insert_bc_gradphic.$(OBJEXT) \
-	vof_insert_bc_norm.$(OBJEXT) vof_normalize.$(OBJEXT)
+	vof_insert_bc_norm.$(OBJEXT) vof_normalize.$(OBJEXT) \
+	vof_plane_vector_mc.$(OBJEXT) vof_plic.$(OBJEXT)
 libVof_a_OBJECTS = $(am_libVof_a_OBJECTS)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
@@ -276,7 +277,9 @@ libVof_a_SOURCES = vof.h                 \
                         vof_gradphic.cpp      \
                         vof_insert_bc_gradphic.cpp \
                         vof_insert_bc_norm.cpp \
-                        vof_normalize.cpp                        
+                        vof_normalize.cpp \
+                        vof_plane_vector_mc.cpp \
+                        vof_plic.cpp                       
 
 INCLUDE = -I../../../../
 all: all-am
@@ -339,6 +342,8 @@ include ./$(DEPDIR)/vof_insert_bc.Po
 include ./$(DEPDIR)/vof_insert_bc_gradphic.Po
 include ./$(DEPDIR)/vof_insert_bc_norm.Po
 include ./$(DEPDIR)/vof_normalize.Po
+include ./$(DEPDIR)/vof_plane_vector_mc.Po
+include ./$(DEPDIR)/vof_plic.Po
 include ./$(DEPDIR)/vof_tension.Po
 include ./$(DEPDIR)/vof_totalvol.Po
 include ./$(DEPDIR)/vof_upwind_advance.Po

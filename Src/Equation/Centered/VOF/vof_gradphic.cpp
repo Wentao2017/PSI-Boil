@@ -107,7 +107,17 @@ void VOF::gradphic(const Scalar & sca) {
   ny.exchange_all();
   nz.exchange_all();
 
-  boil::plot->plot(nx,ny,nz, "clr-nx-ny-nz", time->current_step());
+//  for (int k = 1; k < 32; k=k+1)
+//  {
+//    std::cout<<"gradphic "<<nx [16][32][k] <<"\n";
+//  }
+ 
+//  for_aijk(i,j,k)
+//    std::cout<<"gradphic "<<nx [i][j][k] <<"\n";
+
+
+
+//  boil::plot->plot(nx,ny,nz, "clr-nx-ny-nz", time->current_step());
   //boil::plot->plot(sca, "dist", time->current_step());
   //exit(0);
 

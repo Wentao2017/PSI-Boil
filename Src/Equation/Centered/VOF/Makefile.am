@@ -13,6 +13,8 @@ libVof_a_SOURCES = vof.h                 \
                         vof_gradphic.cpp      \
                         vof_insert_bc_gradphic.cpp \
                         vof_insert_bc_norm.cpp \
-                        vof_normalize.cpp                        
+                        vof_normalize.cpp \
+                        vof_plane_vector_mc.cpp \
+                        vof_plic.cpp                       
 
 INCLUDE = -I@top_srcdir@/

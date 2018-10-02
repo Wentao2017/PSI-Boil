@@ -4,6 +4,7 @@
 |                       |
 +----------------------*/
 #include "Include/psi-boil.h"
+#include <fstream>
 
 /* boundary conditions */
 const int NX= 32;
@@ -23,7 +24,7 @@ main(int argc, char * argv[]) {
   /*--------------------------------+
   |  choose the output file format  |
   +--------------------------------*/
-  boil::plot = new PlotGMV();
+  boil::plot = new PlotTEC();
 
   /*----------+
   |  grid(s)  |
@@ -37,8 +38,19 @@ main(int argc, char * argv[]) {
   +---------*/
   Domain d(gx, gy, gz);
 
-  Body surf;
-
+  /*-------------------+
+  |  time-integration  |
+  +-------------------*/
+  const int  ndt = 20;
+  //const int ndt = 1;
+  const int nint = 1;
+  const real dt  = 0.25 * LX / real(NX);
+  Times time(ndt, dt);
+  
+  OPR(  NX );
+  OPR(  dt );
+  OPR( ndt );
+  
   /*----------------+
   |  linear solver  |
   +----------------*/
@@ -61,6 +73,23 @@ main(int argc, char * argv[]) {
   c.bc().add( BndCnd( Dir::kmin(), BndType::dirichlet(), 0.0 ) );
   c.bc().add( BndCnd( Dir::kmax(), BndType::neumann() ) );
 
+  /*--------------------+
+  |  initial condition  |
+  +--------------------*/
+  Comp m=Comp::u();
+  for_avmijk(uvw,m,i,j,k)
+    uvw[m][i][j][k]=1.0;
+
+  m=Comp::v();
+  for_avmijk(uvw,m,i,j,k)
+    uvw[m][i][j][k]=0.0;
+
+  m=Comp::w();
+  for_avmijk(uvw,m,i,j,k)
+    uvw[m][i][j][k]=0.0;
+
+  uvw.exchange_all();
+
   /*---------+
   |  circle  |
   +---------*/
@@ -74,12 +103,33 @@ main(int argc, char * argv[]) {
 
   c.exchange();
 
-  Times time(1, 0.00004); /* ndt, dt */
+  ColorFunction conc  (c, g, 1.0, 1.0, uvw, time, solver);
 
-  VOF conc(c, g, kappa, 1.0, 1.0, uvw, time, solver);	
-  boil::plot->plot(c,"c", 0);
-  
-  conc.plic();
+  for(time.start(); time.end(); time.increase()) {
+
+  boil::oout << "########################" << boil::endl;
+  boil::oout << "#                       " << boil::endl;
+  boil::oout << "# TIME:      " << time.current_time() << boil::endl;
+  boil::oout << "#                       " << boil::endl;
+  boil::oout << "# TIME STEP: " << time.current_step()
+             << "/"             << time.total_steps() << boil::endl;
+  boil::oout << "#                       " << boil::endl;
+  boil::oout << "########################" << boil::endl;
+
+    /*---------------------------+
+    |  fully explicit with conc  |
+    +---------------------------*/
+    conc.new_time_step();
+    //conc.convection();
+    conc.advance();
+    conc.sharpen();
+    conc.totalvol();
+    
+    if(time.current_step() % nint == 0) {
+      boil::plot->plot(uvw, c, "uvw-c",  time.current_step());
+    }
+    
+  }
 
   boil::oout << "finished" << boil::endl;
 

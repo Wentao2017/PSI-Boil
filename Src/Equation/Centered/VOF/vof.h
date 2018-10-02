@@ -30,7 +30,9 @@ class VOF : public Centered {
     void front_minmax();
     void init();
     void upwind_advance();
-    void gradphic(const Scalar & g);
+    void plic();
+//    void gradphic(const Scalar & g);
+//    void plane_vector_mc(real & r1, real & r2, real & r3);
 
     // getter for front_minmax
     real get_xminft() { return(xminft);};
@@ -45,12 +47,14 @@ class VOF : public Centered {
     void bdcurv(const Scalar & g, const real & v);
     void insert_bc(const Scalar & g);
     void gradphi(const Scalar & g);
-  //  void gradphic(const Scalar & g);
+    void gradphic(const Scalar & g);
+    void plane_vector_mc();
     void insert_bc_gradphic(const Scalar & g);
     void insert_bc_norm();
     void normalize(real & r1, real & r2, real & r3);
 
     Scalar nx,ny,nz,nmag;/* normal to interface */
+    Scalar vma, vmb, vmc;
     Scalar clr,clrn;     /* color function */
     Scalar gpx,gpy,gpz,gpxn,gpyn,gpzn;
     Scalar kappa;        /* curvature */

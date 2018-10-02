@@ -27,7 +27,11 @@ VOF::VOF(const Scalar & PHI,
   gpxn( *PHI.domain() ),
   gpyn( *PHI.domain() ),
   gpzn( *PHI.domain() ),
-  clrn( *PHI.domain() )
+  clrn( *PHI.domain() ),
+  vma( *PHI.domain() ),
+  vmb( *PHI.domain() ),
+  vmc( *PHI.domain() )
+
 
 
 /*------------------------------------------------------+
@@ -46,6 +50,9 @@ VOF::VOF(const Scalar & PHI,
   gpyn    = phi.shape();
   gpzn    = phi.shape();
   clrn    = phi.shape();
+  vma     = phi.shape();
+  vmb     = phi.shape();
+  vmc     = phi.shape();
 
   assert(PHI.domain() == F.domain());
 
