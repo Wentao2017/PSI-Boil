@@ -103,7 +103,8 @@ am_libVof_a_OBJECTS = vof.$(OBJEXT) vof_advance.$(OBJEXT) \
 	vof_totalvol.$(OBJEXT) vof_upwind_advance.$(OBJEXT) \
 	vof_gradphic.$(OBJEXT) vof_insert_bc_gradphic.$(OBJEXT) \
 	vof_insert_bc_norm.$(OBJEXT) vof_normalize.$(OBJEXT) \
-	vof_plane_vector_mc.$(OBJEXT) vof_plic.$(OBJEXT)
+	vof_plane_vector_mc.$(OBJEXT) vof_plic.$(OBJEXT) \
+	vof_calc_alpha.$(OBJEXT)
 libVof_a_OBJECTS = $(am_libVof_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -279,7 +280,8 @@ libVof_a_SOURCES = vof.h                 \
                         vof_insert_bc_norm.cpp \
                         vof_normalize.cpp \
                         vof_plane_vector_mc.cpp \
-                        vof_plic.cpp                       
+                        vof_plic.cpp \
+                        vof_calc_alpha.cpp                       
 
 INCLUDE = -I@top_srcdir@/
 all: all-am
@@ -334,6 +336,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vof.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vof_advance.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vof_bdcurv.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vof_calc_alpha.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vof_curv.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vof_front_minmax.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vof_gradphi.Po@am__quote@

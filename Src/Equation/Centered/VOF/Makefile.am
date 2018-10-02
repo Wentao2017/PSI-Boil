@@ -15,6 +15,7 @@ libVof_a_SOURCES = vof.h                 \
                         vof_insert_bc_norm.cpp \
                         vof_normalize.cpp \
                         vof_plane_vector_mc.cpp \
-                        vof_plic.cpp                       
+                        vof_plic.cpp \
+                        vof_calc_alpha.cpp                       
 
 INCLUDE = -I@top_srcdir@/

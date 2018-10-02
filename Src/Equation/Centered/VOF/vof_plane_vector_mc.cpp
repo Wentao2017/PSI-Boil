@@ -22,7 +22,7 @@ void VOF::plane_vector_mc() {
   vmb.exchange_all();
   vmc.exchange_all();
 
-
+#if 0
   std::ofstream fout0;
   fout0.open("vma.txt");
   for_aijk(i,j,k)
@@ -40,7 +40,7 @@ void VOF::plane_vector_mc() {
   for_aijk(i,j,k)
     fout2<<"vmc "<<i<<" "<<j<<" "<<k<<" "<<vmc[i][j][k] <<"\n";
   fout2.close();
-
+#endif
 
 
   return;

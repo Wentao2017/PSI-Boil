@@ -30,9 +30,21 @@ VOF::VOF(const Scalar & PHI,
   clrn( *PHI.domain() ),
   vma( *PHI.domain() ),
   vmb( *PHI.domain() ),
-  vmc( *PHI.domain() )
-
-
+  vmc( *PHI.domain() ),
+  alpha( *PHI.domain() ),
+  vm1( *PHI.domain() ),
+  vm2( *PHI.domain() ),
+  vm3( *PHI.domain() ),
+  vm12( *PHI.domain() ),
+  w( *PHI.domain() ),
+  v1( *PHI.domain() ),
+  v3( *PHI.domain() ),
+  a0( *PHI.domain() ),
+  a1( *PHI.domain() ),
+  a2( *PHI.domain() ),
+  q0( *PHI.domain() ),
+  sp( *PHI.domain() ),
+  th( *PHI.domain() )
 
 /*------------------------------------------------------+
 |  this constructor is called only at the finest level  |
@@ -53,6 +65,20 @@ VOF::VOF(const Scalar & PHI,
   vma     = phi.shape();
   vmb     = phi.shape();
   vmc     = phi.shape();
+  alpha   = phi.shape();
+  vm1     = phi.shape();
+  vm2     = phi.shape();
+  vm3     = phi.shape();
+  vm12    = phi.shape();
+  w       = phi.shape();
+  v1      = phi.shape();
+  v3      = phi.shape(); 
+  a0      = phi.shape();
+  a1      = phi.shape();
+  a2      = phi.shape();
+  q0      = phi.shape();
+  sp      = phi.shape();
+  th      = phi.shape();
 
   assert(PHI.domain() == F.domain());
 
