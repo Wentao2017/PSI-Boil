@@ -53,19 +53,25 @@ class VOF : public Centered {
     void insert_bc_norm();
     void normalize(real & r1, real & r2, real & r3);
     void calc_alpha();
+    void calc_v();
 
     Scalar nx,ny,nz,nmag;/* normal to interface */
-    Scalar vma, vmb, vmc;
+    Scalar vma, vmb, vmc, vma_tmp, vmb_tmp, vmc_tmp;
     Scalar vm1,vm2,vm3,vm12;
     Scalar v1,v3;
     Scalar a0,a1,a2;
     Scalar q0,sp,th;
+    Scalar absgu;         /* absolute value of cfl number */
+    Scalar ra,qa; 
     Scalar clr,clrn;     /* color function */
     Scalar gpx,gpy,gpz,gpxn,gpyn,gpzn;
     Scalar w;
     Scalar kappa;        /* curvature */
     Scalar stmp;
-    Scalar alpha;    /* plane constant */
+    Scalar alpha, alpha_tmp;    /* plane constant */
+    Scalar a;
+    Scalar vv;
+
     Matter jelly;   /* virtual fluid for level set transport */
     real xminft,xmaxft,yminft,ymaxft,zminft,zmaxft; /* xyz min&max of front */
     real pi,tanfac,theta;

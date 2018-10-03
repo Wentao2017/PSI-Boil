@@ -44,41 +44,59 @@ VOF::VOF(const Scalar & PHI,
   a2( *PHI.domain() ),
   q0( *PHI.domain() ),
   sp( *PHI.domain() ),
-  th( *PHI.domain() )
+  th( *PHI.domain() ),
+  absgu( *PHI.domain() ),
+  ra( *PHI.domain() ),
+  qa( *PHI.domain() ),
+  alpha_tmp( *PHI.domain() ),
+  vma_tmp( *PHI.domain() ),
+  vmb_tmp( *PHI.domain() ),
+  vmc_tmp( *PHI.domain() ),
+  a( *PHI.domain() ),
+  vv( *PHI.domain() )
 
 /*------------------------------------------------------+
 |  this constructor is called only at the finest level  |
 +------------------------------------------------------*/
 { 
-  clr     = phi.shape();
-  nx      = phi.shape();
-  ny      = phi.shape();
-  nz      = phi.shape();
-  nmag    = phi.shape();
-  gpx     = phi.shape();
-  gpy     = phi.shape();
-  gpz     = phi.shape();
-  gpxn    = phi.shape();
-  gpyn    = phi.shape();
-  gpzn    = phi.shape();
-  clrn    = phi.shape();
-  vma     = phi.shape();
-  vmb     = phi.shape();
-  vmc     = phi.shape();
-  alpha   = phi.shape();
-  vm1     = phi.shape();
-  vm2     = phi.shape();
-  vm3     = phi.shape();
-  vm12    = phi.shape();
-  w       = phi.shape();
-  v1      = phi.shape();
-  v3      = phi.shape(); 
-  a0      = phi.shape();
-  a1      = phi.shape();
-  a2      = phi.shape();
-  q0      = phi.shape();
-  sp      = phi.shape();
-  th      = phi.shape();
+  clr       = phi.shape();
+  nx        = phi.shape();
+  ny        = phi.shape();
+  nz        = phi.shape();
+  nmag      = phi.shape();
+  gpx       = phi.shape();
+  gpy       = phi.shape();
+  gpz       = phi.shape();
+  gpxn      = phi.shape();
+  gpyn      = phi.shape();
+  gpzn      = phi.shape();
+  clrn      = phi.shape();
+  vma       = phi.shape();
+  vmb       = phi.shape();
+  vmc       = phi.shape();
+  alpha     = phi.shape();
+  vm1       = phi.shape();
+  vm2       = phi.shape();
+  vm3       = phi.shape();
+  vm12      = phi.shape();
+  w         = phi.shape();
+  v1        = phi.shape();
+  v3        = phi.shape(); 
+  a0        = phi.shape();
+  a1        = phi.shape();
+  a2        = phi.shape();
+  q0        = phi.shape();
+  sp        = phi.shape();
+  th        = phi.shape();
+  absgu     = phi.shape();
+  ra        = phi.shape();
+  qa        = phi.shape();
+  alpha_tmp = phi.shape();
+  vma_tmp   = phi.shape();
+  vmb_tmp   = phi.shape();
+  vmc_tmp   = phi.shape();
+  a         = phi.shape();
+  vv        = phi.shape();
 
   assert(PHI.domain() == F.domain());
 
