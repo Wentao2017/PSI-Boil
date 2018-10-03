@@ -2,7 +2,7 @@
 #include <algorithm>
 
 #if 0
-void VOF::calc_alpha(const Scalar & sca){
+void VOF::calc_alpha(){
 
     for_ijk(i,j,k){
 
@@ -75,7 +75,7 @@ void VOF::calc_alpha(const Scalar & sca){
 
 
 #if 1
-void VOF::calc_alpha(const Scalar & sca){
+void VOF::calc_alpha(){
 
 
   for_ijk(i,j,k){
@@ -145,7 +145,8 @@ void VOF::calc_alpha(const Scalar & sca){
 
     }
   }
-
+  
+  alpha.bnd_update();
   alpha.exchange_all();
   
   #if 1

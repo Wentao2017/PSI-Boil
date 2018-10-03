@@ -52,7 +52,7 @@ class VOF : public Centered {
     void insert_bc_gradphic(const Scalar & g);
     void insert_bc_norm();
     void normalize(real & r1, real & r2, real & r3);
-    void calc_alpha(const Scalar & sca);
+    void calc_alpha();
 
     Scalar nx,ny,nz,nmag;/* normal to interface */
     Scalar vma, vmb, vmc;

@@ -6,7 +6,7 @@ void VOF::plic() {
   
   gradphic(phi);
   plane_vector_mc();
-  calc_alpha(phi);
+  calc_alpha();
 
 #if 1
   boil::plot->plot(phi,nx,ny,nz, "clr-nx-ny-nz");
