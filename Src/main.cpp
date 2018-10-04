@@ -109,7 +109,8 @@ main(int argc, char * argv[]) {
   VOF conc(c, g, kappa, 1.0, 1.0, uvw, time, solver);	
   boil::plot->plot(c,"c", 0);
   
-  conc.plic();
+  //conc.plic();
+  conc.advance();
 
   boil::oout << "finished" << boil::endl;
 

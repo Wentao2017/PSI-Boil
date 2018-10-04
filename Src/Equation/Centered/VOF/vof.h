@@ -43,6 +43,9 @@ class VOF : public Centered {
     real get_zmaxft() { return(zmaxft);};
 
   protected:
+    void advance_x();
+    void advance_y();
+    void advance_z();
     void curv(const Scalar & g);
     void bdcurv(const Scalar & g, const real & v);
     void insert_bc(const Scalar & g);
@@ -54,6 +57,8 @@ class VOF : public Centered {
     void normalize(real & r1, real & r2, real & r3);
     void calc_alpha();
     void calc_v();
+    real calc_alpha(real & r1, real & r2, real & r3, real & r4);
+    real calc_v(real r1, real r2, real r3, real r4);
 
     Scalar nx,ny,nz,nmag;/* normal to interface */
     Scalar vma, vmb, vmc, vma_tmp, vmb_tmp, vmc_tmp;
@@ -61,7 +66,7 @@ class VOF : public Centered {
     Scalar v1,v3;
     Scalar a0,a1,a2;
     Scalar q0,sp,th;
-    Scalar absgu;         /* absolute value of cfl number */
+    Scalar absgu, absgv;         /* absolute value of cfl number */
     Scalar ra,qa; 
     Scalar clr,clrn;     /* color function */
     Scalar gpx,gpy,gpz,gpxn,gpyn,gpzn;
@@ -71,6 +76,7 @@ class VOF : public Centered {
     Scalar alpha, alpha_tmp;    /* plane constant */
     Scalar a;
     Scalar vv;
+    Scalar flux_x;
 
     Matter jelly;   /* virtual fluid for level set transport */
     real xminft,xmaxft,yminft,ymaxft,zminft,zmaxft; /* xyz min&max of front */

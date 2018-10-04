@@ -1,5 +1,5 @@
 #include "vof.h"
-#include <algorithm>
+//#include <algorithm>
 
 #if 0
 void VOF::calc_alpha(){
@@ -159,5 +159,11 @@ void VOF::calc_alpha(){
 
   return;
 
+}
+
+real VOF::calc_alpha(real & v, real & vma, real & vmb, real & vmc){
+  real w = boil::minr(v, 1.0-v);
+  real alpha;
+  return alpha;
 }
 #endif

@@ -53,7 +53,8 @@ VOF::VOF(const Scalar & PHI,
   vmb_tmp( *PHI.domain() ),
   vmc_tmp( *PHI.domain() ),
   a( *PHI.domain() ),
-  vv( *PHI.domain() )
+  vv( *PHI.domain() ),
+  flux_x( *PHI.domain() )
 
 /*------------------------------------------------------+
 |  this constructor is called only at the finest level  |
@@ -97,6 +98,7 @@ VOF::VOF(const Scalar & PHI,
   vmc_tmp   = phi.shape();
   a         = phi.shape();
   vv        = phi.shape();
+  flux_x    = phi.shape();
 
   assert(PHI.domain() == F.domain());
 
