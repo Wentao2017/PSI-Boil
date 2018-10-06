@@ -168,7 +168,7 @@ real VOF::calc_alpha(real & v, real & vma, real & vmb, real & vmc){
   real a0, a1, a2, q0, sp, th;
   real alpha;
 
-  //std::cout<<"calc_alpha:point00 \n";
+  std::cout<<"calc_alpha:point00 \n";
 
   w     = boil::minr(v, 1.0-v);  
   vm1   = boil::minr(vma, vmb, vmc);
@@ -178,50 +178,51 @@ real VOF::calc_alpha(real & v, real & vma, real & vmb, real & vmc){
 
   v1    = pow(vm1, 2.0) / (6.0 * vm2 * vm3 + boil::pico);
 
-  //std::cout<<"calc_alpha:point10 \n";
+  std::cout<<"calc_alpha:point10 \n";
 
   if (w < v1){
     alpha = pow(6.0 * vm1 * vm2 * vm3 * w, 1.0/3.0);
   } else if(w < v1 + (vm2-vm1) / (2.0 * vm3)){
     alpha = 0.5 * (vm1 + sqrt(pow(vm1, 2) + 8.0 * vm2 * vm3 * (w - v1)));
   } else {
-    //std::cout<<"calc_alpha:point15 \n";
+    std::cout<<"calc_alpha:point15 \n";
     alpha = 0.0;
     if (vm3 < vm12){
-      //std::cout<<"calc_alpha:point16 \n";
+      std::cout<<"calc_alpha:point16 \n";
       v3 = (pow(vm3, 2.0) * (3.0 * vm12 - vm3) + pow(vm1, 2.0) * (vm1 - 3.0 *
            vm3) + pow(vm2, 2.0) * (vm2 - 3.0 * vm3)) / (6.0 * vm1 * vm2 * vm3);
     } else{
-      //std::cout<<"calc_alpha:point17 \n";
+      std::cout<<"calc_alpha:point17 \n";
       v3 = 0.5 * vm12 / vm3;
       if(v3 <= w){
         alpha = vm3 * w + 0.5 * vm12;
       }
     }
-    //std::cout<<"calc_alpha:point18 \n";
+    std::cout<<"calc_alpha:point18 \n";
     if (alpha == 0.0){
-      //std::cout<<"calc_alpha:point19 \n";
+      std::cout<<"calc_alpha:point19 \n";
       if(w < v3){
-        //std::cout<<"calc_alpha:point20 \n";
+        std::cout<<"calc_alpha:point20 \n";
         a2 = -3.0 * vm12;
         a1 = 3.0 * (pow(vm1, 2.0) + pow(vm2, 2.0));               
         a0 = -(pow(vm1, 3.0) + pow(vm2, 3.0) - 6.0 * vm1 * vm2 * vm3 * w);
       } else {
-        //std::cout<<"calc_alpha:point21 \n";
+        std::cout<<"calc_alpha:point21 \n";
         a2 = -1.5;
         a1 = 1.5 * (pow(vm1, 2.0) + pow(vm2, 2.0) + pow(vm3, 2.0));
         a0 = -0.5 * (pow(vm1, 3.0) + pow(vm2, 3.0) + pow(vm3, 3.0) - 6.0 *
              vm1 * vm2 * vm3 * w);
       }
-      //std::cout<<"calc_alpha:point22 \n";
+      std::cout<<"calc_alpha:point22 \n";
       q0     = (1.0/6) * (a1 * a2 - 3.0 * a0) - pow(a2, 3.0) * (1.0/27.0);
-      //std::cout<<"calc_alpha:point23 \n";
+      std::cout<<"calc_alpha:point23 \n";
+      std::cout<<"inside sp "<<-1.0/3.0 * a1 + 1.0/9.0 * pow(a2, 2.0)<<"\n";
       sp    = sqrt(-1.0/3.0 * a1 + 1.0/9.0 * pow(a2, 2.0));
-      //std::cout<<"calc_alpha:point24 \n";
+      std::cout<<"calc_alpha:point24 \n";
       th    = 1.0/3.0 * acos(q0 / (pow(sp, 3.0)));
-      //std::cout<<"calc_alpha:point25 \n";
+      std::cout<<"calc_alpha:point25 \n";
       alpha = 2.0 * sp * cos(th + (4.0/3.0 * (boil::pi))) - (1.0/3.0) * a2;
-      //std::cout<<"calc_alpha:point29 \n";
+      std::cout<<"calc_alpha:point29 \n";
     }
   }
  

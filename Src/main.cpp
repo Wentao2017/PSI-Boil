@@ -48,9 +48,9 @@ main(int argc, char * argv[]) {
   /*-------------------+
   |  time-integration  |
   +-------------------*/
-  const int  ndt = 5;
+  const int  ndt = 10000;
   //const int ndt = 1;
-  const int nint = 5;
+  const int nint = 50;
   const real dt  = 0.25 * LX / real(NX);
   Times time(ndt, dt); 
 	
