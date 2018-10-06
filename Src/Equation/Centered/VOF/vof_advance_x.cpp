@@ -6,13 +6,15 @@ void VOF::advance_x() {
   // calculate normal vector
   gradphic(phi);
   
-  boil::plot->plot(nx, ny, nz, "nx-ny-nz", time->current_step());
+//boil::plot->plot(nx, ny, nz, "nx-ny-nz", time->current_step());
+#if 0
   std::cout<<"nx50 "<<nx[50][1][1]<<" "<<"nx51 "<<nx[51][1][1]<<"\n";
   std::cout<<"ny50 "<<ny[50][1][1]<<" "<<"ny51 "<<ny[51][1][1]<<"\n";
   std::cout<<"nz50 "<<nz[50][1][1]<<" "<<"nz51 "<<nz[51][1][1]<<"\n";
   std::cout<<"nx75 "<<nx[75][1][1]<<" "<<"nx76 "<<nx[76][1][1]<<"\n";
   std::cout<<"ny75 "<<ny[75][1][1]<<" "<<"ny76 "<<ny[76][1][1]<<"\n";
   std::cout<<"nz75 "<<nz[75][1][1]<<" "<<"nz76 "<<nz[76][1][1]<<"\n";
+#endif
  
   // advance in the x-direction
 
@@ -60,23 +62,23 @@ void VOF::advance_x() {
       vm2 *= qa;
       vm3 *= qa;
       
-      std::cout<<"i= "<<i-1<<" j= "<<j<<" k= "<<k<<"\n"; 
-      std::cout<<"phi[50] "<<phi[50][1][1]<<" phi[51] "<<phi[51][1][1] <<"\n";
+  //    std::cout<<"i= "<<i-1<<" j= "<<j<<" k= "<<k<<"\n"; 
+  //    std::cout<<"phi[50] "<<phi[50][1][1]<<" phi[51] "<<phi[51][1][1] <<"\n";
  
       real alpha = calc_alpha(c, vm1, vm2, vm3);
       
-      if(i==52&&j==1&&k==1){
-        std::cout<<"alpha[52] "<<alpha<<"\n";
-      }
+ //     if(i==52&&j==1&&k==1){
+ //       std::cout<<"alpha[52] "<<alpha<<"\n";
+ //     }
 
       real ra = vm1 * (1.0 - absg);
       qa = 1.0/(1.0-ra);
       if (g*vn1 > 0) alpha = alpha -ra;
       vm1 = vm1 * absg;
 
-      if(i==52&&j==1&&k==1){
-        std::cout<<"alpha[52] "<<alpha * qa<<"\n";
-      }
+//      if(i==52&&j==1&&k==1){
+//        std::cout<<"alpha[52] "<<alpha * qa<<"\n";
+//      }
 
        
        // calculate f: flux

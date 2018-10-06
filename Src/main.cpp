@@ -48,7 +48,7 @@ main(int argc, char * argv[]) {
   /*-------------------+
   |  time-integration  |
   +-------------------*/
-  const int  ndt = 10000;
+  const int  ndt = 1000;
   //const int ndt = 1;
   const int nint = 50;
   const real dt  = 0.25 * LX / real(NX);
@@ -168,8 +168,8 @@ main(int argc, char * argv[]) {
     //std::cout<<"c50 before advance "<<c[50][1][1]<<" "<<"c51 before advance "<<c[51][1][1]<<"\n";
     //std::cout<<"c75 before advance "<<c[75][1][1]<<" "<<"c76 before advance "<<c[76][1][1]<<"\n"; 
     conc.advance();
-    std::cout<<"c50 after advance "<<c[50][1][1]<<" "<<"c51 after advance "<<c[51][1][1]<<"\n"; 
-    std::cout<<"c75 after advance "<<c[75][1][1]<<" "<<"c76 after advance "<<c[76][1][1]<<"\n"; 
+    //std::cout<<"c50 after advance "<<c[50][1][1]<<" "<<"c51 after advance "<<c[51][1][1]<<"\n"; 
+    //std::cout<<"c75 after advance "<<c[75][1][1]<<" "<<"c76 after advance "<<c[76][1][1]<<"\n"; 
     //conc.convection();
     //conc.advance();
     //conc.sharpen();
