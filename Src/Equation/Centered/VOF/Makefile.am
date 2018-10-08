@@ -4,6 +4,7 @@ libVof_a_SOURCES = vof.h                 \
                         vof_advance.cpp       \
                         vof_advance_x.cpp     \
                         vof_advance_y.cpp     \
+                        vof_advance_z.cpp     \
                         vof_bdcurv.cpp        \
                         vof_curv.cpp          \
                         vof_front_minmax.cpp  \

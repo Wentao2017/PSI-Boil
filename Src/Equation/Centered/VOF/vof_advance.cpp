@@ -7,9 +7,12 @@ void VOF::advance() {
   // advance_x();
 
 
-  // advance in x-direction
-  advance_y();
-  //advance_z();
+  // advance in y-direction
+  //advance_y();
+  
+
+  // advance in z-direction
+  advance_z();
 
   return;
 }

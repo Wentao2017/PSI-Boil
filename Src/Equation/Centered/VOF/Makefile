@@ -98,14 +98,15 @@ libVof_a_AR = $(AR) $(ARFLAGS)
 libVof_a_LIBADD =
 am_libVof_a_OBJECTS = vof.$(OBJEXT) vof_advance.$(OBJEXT) \
 	vof_advance_x.$(OBJEXT) vof_advance_y.$(OBJEXT) \
-	vof_bdcurv.$(OBJEXT) vof_curv.$(OBJEXT) \
-	vof_front_minmax.$(OBJEXT) vof_gradphi.$(OBJEXT) \
-	vof_insert_bc.$(OBJEXT) vof_tension.$(OBJEXT) \
-	vof_totalvol.$(OBJEXT) vof_upwind_advance.$(OBJEXT) \
-	vof_gradphic.$(OBJEXT) vof_insert_bc_gradphic.$(OBJEXT) \
-	vof_insert_bc_norm.$(OBJEXT) vof_normalize.$(OBJEXT) \
-	vof_plane_vector_mc.$(OBJEXT) vof_plic.$(OBJEXT) \
-	vof_calc_alpha.$(OBJEXT) vof_calc_v.$(OBJEXT)
+	vof_advance_z.$(OBJEXT) vof_bdcurv.$(OBJEXT) \
+	vof_curv.$(OBJEXT) vof_front_minmax.$(OBJEXT) \
+	vof_gradphi.$(OBJEXT) vof_insert_bc.$(OBJEXT) \
+	vof_tension.$(OBJEXT) vof_totalvol.$(OBJEXT) \
+	vof_upwind_advance.$(OBJEXT) vof_gradphic.$(OBJEXT) \
+	vof_insert_bc_gradphic.$(OBJEXT) vof_insert_bc_norm.$(OBJEXT) \
+	vof_normalize.$(OBJEXT) vof_plane_vector_mc.$(OBJEXT) \
+	vof_plic.$(OBJEXT) vof_calc_alpha.$(OBJEXT) \
+	vof_calc_v.$(OBJEXT)
 libVof_a_OBJECTS = $(am_libVof_a_OBJECTS)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
@@ -270,6 +271,7 @@ libVof_a_SOURCES = vof.h                 \
                         vof_advance.cpp       \
                         vof_advance_x.cpp     \
                         vof_advance_y.cpp     \
+                        vof_advance_z.cpp     \
                         vof_bdcurv.cpp        \
                         vof_curv.cpp          \
                         vof_front_minmax.cpp  \
@@ -341,6 +343,7 @@ include ./$(DEPDIR)/vof.Po
 include ./$(DEPDIR)/vof_advance.Po
 include ./$(DEPDIR)/vof_advance_x.Po
 include ./$(DEPDIR)/vof_advance_y.Po
+include ./$(DEPDIR)/vof_advance_z.Po
 include ./$(DEPDIR)/vof_bdcurv.Po
 include ./$(DEPDIR)/vof_calc_alpha.Po
 include ./$(DEPDIR)/vof_calc_v.Po
