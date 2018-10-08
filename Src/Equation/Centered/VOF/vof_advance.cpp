@@ -4,10 +4,11 @@
 void VOF::advance() {
 
   // advance in x-direction
-  advance_x();
+  // advance_x();
 
 
-  //advance_y();
+  // advance in x-direction
+  advance_y();
   //advance_z();
 
   return;
