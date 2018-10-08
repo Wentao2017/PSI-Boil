@@ -17,16 +17,19 @@ void VOF::advance_x() {
 #endif
  
   // advance in the x-direction
-
-  stmp=phi;
+  for_ijk(i,j,k){
+    stmp[i][j][k]=phi[i][j][k] * dV(i,j,k);
+  }
 
   Comp m = Comp::u();
   for_vmijk((*u),m,i,j,k){
 
-    //std::cout<<i<<" "<<j<<" "<<k<<"\n";
-
     // flux
     real f;
+
+    // upwind i-index
+    int iup = i-1;
+    if((*u)[m][i][j][k]<0.0) iup = i;             
 
     // calculate g: CFL upwind
     real g;
@@ -34,15 +37,15 @@ void VOF::advance_x() {
     g = ((*u)[m][i][j][k])*dt/phi.dxc(i-1);
     if((*u)[m][i][j][k]<0.0) g = ((*u)[m][i][j][k])*dt/phi.dxc(i);
 
-    if (approx(phi[i-1][j][k], 0.0) && approx(phi[i][j][k], 0.0)) {
-      f = 0.0;
-    } else if(approx(phi[i-1][j][k],1.0)&&approx(phi[i][j][k],1.0)) {
-      f = g;
-    } else {
+    if (approx(phi[iup][j][k], 0.0)) {
 
-      // upwind i-index
-      int iup = i-1;
-      if((*u)[m][i][j][k]<0.0) iup = i;
+      f = 0.0 * g;
+
+    } else if(approx(phi[iup][j][k],1.0)) {
+
+      f = 1.0 * g;
+
+    } else {
 
       // color function upwind
       real c = phi[iup][j][k];
@@ -61,55 +64,29 @@ void VOF::advance_x() {
       vm1 *= qa;
       vm2 *= qa;
       vm3 *= qa;
-      
-  //    std::cout<<"i= "<<i-1<<" j= "<<j<<" k= "<<k<<"\n"; 
-  //    std::cout<<"phi[50] "<<phi[50][1][1]<<" phi[51] "<<phi[51][1][1] <<"\n";
- 
       real alpha = calc_alpha(c, vm1, vm2, vm3);
       
- //     if(i==52&&j==1&&k==1){
- //       std::cout<<"alpha[52] "<<alpha<<"\n";
- //     }
-
       real ra = vm1 * (1.0 - absg);
       qa = 1.0/(1.0-ra);
       if (g*vn1 > 0) alpha = alpha -ra;
       vm1 = vm1 * absg;
 
-//      if(i==52&&j==1&&k==1){
-//        std::cout<<"alpha[52] "<<alpha * qa<<"\n";
-//      }
-
-       
-       // calculate f: flux
+      // calculate f: flux
       f = calc_v(alpha*qa, vm1*qa, vm2*qa, vm3*qa) * g;
+
     }
 
     // update color function store as stmp
-    stmp[i-1][j][k] = stmp[i-1][j][k]-f;
-    stmp[i  ][j][k] = stmp[i  ][j][k]+f;
-
-#if 0
-    if((i==75||i==76)&&j==1&&k==1){
-      std::cout<<"\n";
-      //std::cout<<"iup= "<<iup<<" c= "<<c<<" vn1= "<<vn1<<" vn2= "<<vn2<<" vn3= "<<vn3<<"\n";
-      //std::cout<<"f= "<<f<<" g= "<<g<<" vm1= "<<vm1<<" vm2= "<<vm2<<" vm3= "<<vm3<<"\n";
-      std::cout<<"f= "<<f<<"\n";
-      //std::cout<<"alpha= "<<alpha<<" calc_v= "<<f/g<<"\n";
-      std::cout<<"stmp[i-1]= "<<stmp[i-1][j][k]<<" "<<phi[i-1][j][k]<<"\n";
-      std::cout<<"stmp[i  ]= "<<stmp[i  ][j][k]<<" "<<phi[i  ][j][k]<<"\n";
-      std::cout<<"\n";
-    }
-#endif
+    stmp[i-1][j][k] = stmp[i-1][j][k]-f * dV(iup,j,k);
+    stmp[i  ][j][k] = stmp[i  ][j][k]+f * dV(iup,j,k);
 
   }
 
-#if 0
-  std::cout<<"stmp[75]= "<<stmp[75][1][1]<<" "<<stmp[76][1][1]<<"\n";
-#endif
-
   // update phi
-  phi = stmp;
+  for_ijk(i,j,k){
+    real phi_tmp = stmp[i][j][k] / dV(i,j,k);
+    phi[i][j][k] = std::min(1.0,std::max(0.0,phi_tmp));
+  }
   phi.bnd_update();
   phi.exchange_all();
 

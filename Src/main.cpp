@@ -36,7 +36,7 @@ main(int argc, char * argv[]) {
   |  grid(s)  |
   +----------*/
   //Grid1D gx( Range<real>( 0,LX), NX, Periodic::no() );
-  Grid1D gx( Range<real>( 0,LX), NX, Periodic::yes() );
+  Grid1D gx( Range<real>( 0,LX), Range<real>(LX/(2.0 * NX),LX/(2.0 * NX)), NX, Periodic::yes() );
   Grid1D gy( Range<real>( 0,LY), NY, Periodic::yes());
   Grid1D gz( Range<real>( 0,LZ), NZ, Periodic::yes() );
 
@@ -168,6 +168,7 @@ main(int argc, char * argv[]) {
     //std::cout<<"c50 before advance "<<c[50][1][1]<<" "<<"c51 before advance "<<c[51][1][1]<<"\n";
     //std::cout<<"c75 before advance "<<c[75][1][1]<<" "<<"c76 before advance "<<c[76][1][1]<<"\n"; 
     conc.advance();
+    conc.totalvol();
     //std::cout<<"c50 after advance "<<c[50][1][1]<<" "<<"c51 after advance "<<c[51][1][1]<<"\n"; 
     //std::cout<<"c75 after advance "<<c[75][1][1]<<" "<<"c76 after advance "<<c[76][1][1]<<"\n"; 
     //conc.convection();
@@ -181,6 +182,7 @@ main(int argc, char * argv[]) {
 
   }
 
+     
 #if 1
   std::ofstream fout;
   fout.open("profile.txt");
