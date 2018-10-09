@@ -28,9 +28,14 @@ main(int argc, char * argv[]) {
   /*----------+
   |  grid(s)  |
   +----------*/
-  Grid1D gx( Range<real>(-LX/2.0, LX/2.0), NX, Periodic::no());
-  Grid1D gy( Range<real>(-LY/2.0, LY/2.0), NY, Periodic::no());
-  Grid1D gz( Range<real>(-LZ/2.0, LZ/2.0), NZ, Periodic::no());
+
+//  Grid1D gx( Range<real>(-LX/2.0, LX/2.0), NX, Periodic::yes());
+//  Grid1D gy( Range<real>(-LY/2.0, LY/2.0), NY, Periodic::yes());
+//  Grid1D gz( Range<real>(-LZ/2.0, LZ/2.0), NZ, Periodic::yes());
+
+  Grid1D gx( Range<real>(-LX/2.0, LX/2.0), Range<real>(LZ/(2.0 * NZ),LZ/(2.0 * NZ)), NX, Periodic::yes());
+  Grid1D gy( Range<real>(-LY/2.0, LY/2.0), Range<real>(LZ/(2.0 * NZ),LZ/(2.0 * NZ)), NY, Periodic::yes());
+  Grid1D gz( Range<real>(-LZ/2.0, LZ/2.0), Range<real>(LZ/(2.0 * NZ),LZ/(2.0 * NZ)), NZ, Periodic::yes());
 
   /*---------+
   |  domain  |
@@ -41,7 +46,7 @@ main(int argc, char * argv[]) {
   |  time-integration  |
   +-------------------*/
 
-  const int  ndt = 20;
+  const int  ndt = 60;
   const real dt  = 0.25 * LX / real(NX);
   const int  nint = 1;
 
@@ -60,13 +65,26 @@ main(int argc, char * argv[]) {
   /*-----------------------------+ 
   |  insert boundary conditions  |
   +-----------------------------*/
-  c.bc().add( BndCnd( Dir::imin(), BndType::neumann() ) );
-  c.bc().add( BndCnd( Dir::imax(), BndType::neumann() ) );
-  c.bc().add( BndCnd( Dir::jmin(), BndType::neumann() ) );
-  c.bc().add( BndCnd( Dir::jmax(), BndType::neumann() ) );
+  c.bc().add( BndCnd( Dir::imin(), BndType::periodic() ) );
+  c.bc().add( BndCnd( Dir::imax(), BndType::periodic() ) );
+  c.bc().add( BndCnd( Dir::jmin(), BndType::periodic() ) );
+  c.bc().add( BndCnd( Dir::jmax(), BndType::periodic() ) );
  // c.bc().add( BndCnd( Dir::kmin(), BndType::dirichlet(), 0.0 ) );
-  c.bc().add( BndCnd( Dir::kmin(), BndType::neumann() ) );
-  c.bc().add( BndCnd( Dir::kmax(), BndType::neumann() ) );
+  c.bc().add( BndCnd( Dir::kmin(), BndType::periodic() ) );
+  c.bc().add( BndCnd( Dir::kmax(), BndType::periodic() ) );
+
+#if 0
+  for_m(m) {
+    uvw.bc(m).add( BndCnd( Dir::imin(), BndType::symmetry() ) );
+    uvw.bc(m).add( BndCnd( Dir::imax(), BndType::symmetry() ) );
+    uvw.bc(m).add( BndCnd( Dir::jmin(), BndType::symmetry() ) );
+    uvw.bc(m).add( BndCnd( Dir::jmax(), BndType::symmetry() ) );
+    uvw.bc(m).add( BndCnd( Dir::kmin(), BndType::symmetry() ) );
+    uvw.bc(m).add( BndCnd( Dir::kmax(), BndType::symmetry() ) );
+  }
+#endif
+
+
 
   /*--------------------+
   |  initial condition  |
@@ -74,15 +92,15 @@ main(int argc, char * argv[]) {
 
   Comp m=Comp::u();
   for_avmijk(uvw,m,i,j,k)
-    uvw[m][i][j][k]=1.0;
+    uvw[m][i][j][k]=-1.0;
 
   m=Comp::v();
   for_avmijk(uvw,m,i,j,k)
-    uvw[m][i][j][k]=0.0;
+    uvw[m][i][j][k]=-1.0;
 
   m=Comp::w();
   for_avmijk(uvw,m,i,j,k)
-    uvw[m][i][j][k]=0.0;
+    uvw[m][i][j][k]=-1.0;
 
   uvw.exchange_all();
 
@@ -125,6 +143,7 @@ main(int argc, char * argv[]) {
   }
   c.exchange_all();
   c.bnd_update();
+  boil::plot->plot(uvw,c, "uvw-c", 0); 
       
   Times time(ndt, dt); /* ndt, dt */
 
@@ -143,6 +162,7 @@ main(int argc, char * argv[]) {
 
   
   conc.advance();
+  conc.totalvol();
 
   if(time.current_step() % nint == 0) {
       boil::plot->plot(uvw, c, "uvw-c",  time.current_step());

@@ -14,6 +14,11 @@ void VOF::gradphic(const Scalar & sca) {
       ny[i][j][k] = (sca[i][j+1][k]-sca[i][j-1][k])/(dys(j)+dyn(j));
       nz[i][j][k] = (sca[i][j][k+1]-sca[i][j][k-1])/(dzb(k)+dzt(k));
 #endif
+#if 0
+      nx[i][j][k] = (sca[i+1][j][k]-sca[i-1][j][k]);
+      ny[i][j][k] = (sca[i][j+1][k]-sca[i][j-1][k]);
+      nz[i][j][k] = (sca[i][j][k+1]-sca[i][j][k-1]);
+#endif
 #if 1
       real q000, q001, q010, q011, q100, q101, q110, q111;
       q000 = 0.125 * (sca[i-1][j-1][k-1] + sca[i][j-1][k-1]
@@ -66,16 +71,7 @@ void VOF::gradphic(const Scalar & sca) {
 #endif
 #endif
   }
-  
-//  std::cout<<"nx75 "<<nx[75][1][1]<<" "<<"nx76 "<<nx[76][1][1]<<"\n";
-//  std::cout<<"ny75 "<<ny[75][1][1]<<" "<<"ny76 "<<ny[76][1][1]<<"\n";
-//  std::cout<<"nz75 "<<nz[75][1][1]<<" "<<"nz76 "<<nz[76][1][1]<<"\n";
 
-  /* normal vector at adjacent cells next to wall, symmetric and IB */
-  insert_bc_gradphic(sca); 
-
-  /* normal vector on boundary plane */
-  insert_bc_norm();
 
   /* normalize */
   for_avijk(sca,i,j,k) {
@@ -85,6 +81,16 @@ void VOF::gradphic(const Scalar & sca) {
   nx.exchange_all();
   ny.exchange_all();
   nz.exchange_all();
+
+//  std::cout<<"nx75 "<<nx[75][1][1]<<" "<<"nx76 "<<nx[76][1][1]<<"\n";
+//  std::cout<<"ny75 "<<ny[75][1][1]<<" "<<"ny76 "<<ny[76][1][1]<<"\n";
+//  std::cout<<"nz75 "<<nz[75][1][1]<<" "<<"nz76 "<<nz[76][1][1]<<"\n";
+
+  /* normal vector at adjacent cells next to wall, symmetric and IB */
+  insert_bc_gradphic(sca); 
+
+  /* normal vector on boundary plane */
+  insert_bc_norm();
 
   return;
 }

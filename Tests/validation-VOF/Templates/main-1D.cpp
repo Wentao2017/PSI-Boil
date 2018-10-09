@@ -12,15 +12,15 @@ static void __attribute__ ((constructor)) trapfpe(void)
 
 /* domain dimensions (given by problem) */
 //const real LX =   0.5;
-const real LX =   0.2;
-const real LY =   0.2;
-const real LZ =   0.008;
+const real LX =   0.016;
+const real LY =   0.008;
+const real LZ =   0.25;
 
 /* computed parameters */
 //const int NX = 4;
-const int NX = 100;
-const int NY = 100;
-const int NZ = 4;
+const int NX = 4;
+const int NY = 4;
+const int NZ = 125;
 
 /******************************************************************************/
 main(int argc, char * argv[]) {
@@ -39,8 +39,8 @@ main(int argc, char * argv[]) {
 //  Grid1D gx( Range<real>( 0,LX), Range<real>(LX/(2.0 * NX),LX/(2.0 * NX)), NX, Periodic::yes() );
   Grid1D gy( Range<real>( 0,LY), NY, Periodic::yes());
 //  Grid1D gy( Range<real>( 0,LY), Range<real>(LY/(2.0 * NY),LY/(2.0 * NY)), NY, Periodic::yes() );
-  Grid1D gz( Range<real>( 0,LZ), NZ, Periodic::yes() );
-//  Grid1D gz( Range<real>( 0,LZ), Range<real>(LZ/(2.0 * NZ),LZ/(2.0 * NZ)), NZ, Periodic::yes() );
+//  Grid1D gz( Range<real>( 0,LZ), NZ, Periodic::yes() );
+  Grid1D gz( Range<real>( 0,LZ), Range<real>(LZ/(2.0 * NZ),LZ/(2.0 * NZ)), NZ, Periodic::yes() );
 
   /*---------+
   |  domain  |
@@ -50,15 +50,15 @@ main(int argc, char * argv[]) {
   /*-------------------+
   |  time-integration  |
   +-------------------*/
-  const int  ndt = 50;
+  const int  ndt = 1000;
   //const int ndt = 1;
-  const int nint = 1;
-  const real dt  = 0.025 * LX / real(NX);
+  const int nint = 50;
+  const real dt  = 0.25 * LZ / real(NZ);
   Times time(ndt, dt); 
 	
-  //OPR(  NX );
-  //OPR(  dt );
-  //OPR( ndt );
+  OPR(  NY );
+  OPR(  dt );
+  OPR( ndt );
 
   /*------------------+
   |  define unknowns  |
@@ -69,7 +69,6 @@ main(int argc, char * argv[]) {
   /*-----------------------------+ 
   |  insert boundary conditions  |
   +-----------------------------*/
-#if 0
   for_m(m) {
     uvw.bc(m).add( BndCnd( Dir::imin(), BndType::periodic() ) );
     uvw.bc(m).add( BndCnd( Dir::imax(), BndType::periodic() ) );
@@ -82,7 +81,7 @@ main(int argc, char * argv[]) {
     uvw.bc(m).add( BndCnd( Dir::jmin(), BndType::periodic() ) );
     uvw.bc(m).add( BndCnd( Dir::jmax(), BndType::periodic() ) );
   }
-#endif
+  
   c.bc().add( BndCnd( Dir::imin(), BndType::periodic() ) );
   c.bc().add( BndCnd( Dir::imax(), BndType::periodic() ) );
   //c.bc().add( BndCnd( Dir::imin(), BndType::inlet(),1.0 ) );
@@ -99,7 +98,7 @@ main(int argc, char * argv[]) {
   +--------------------*/
   Comp m=Comp::u();
   for_avmijk(uvw,m,i,j,k)
-    uvw[m][i][j][k]=1.0;
+    uvw[m][i][j][k]=0.0;
 
   m=Comp::v();
   for_avmijk(uvw,m,i,j,k)
@@ -107,7 +106,7 @@ main(int argc, char * argv[]) {
 
   m=Comp::w();
   for_avmijk(uvw,m,i,j,k)
-    uvw[m][i][j][k]=0.0;
+    uvw[m][i][j][k]=-1.0;
 
   uvw.exchange_all();
 
@@ -116,10 +115,9 @@ main(int argc, char * argv[]) {
 
 #if 1
   for_vijk(c,i,j,k) {
-    if( 0.02 < c.xc(i) && c.xc(i) < 0.06 && 0.02 < c.yc(j) && c.yc(j) < 0.06 ){
+    if( 0.10 < c.zc(k) && c.zc(k) < 0.15 ){
           c[i][j][k]=1.0;
     }
-
   }
 
   //std::cout<<"c50 "<<c[50][1][1]<<" "<<"c51 "<<c[51][1][1]<<"\n"; 
@@ -144,11 +142,11 @@ main(int argc, char * argv[]) {
   Krylov * solver = new CG(d, Prec::di());
 
   VOF conc  (c, g, kappa, 1.0, 1.0, uvw, time, solver);
-#if 0
+#if 1
   std::ofstream fout0;
   fout0.open("init-profile.txt");
-  for_vi(c,i) {
-       fout0 << c.xc(i) << "  " << c[i][1][1] << "\n";
+  for_vj(c,j) {
+       fout0 << c.yc(j) << "  " << c[1][j][1] << "\n";
   }
   fout0.close();
 #endif
@@ -187,11 +185,11 @@ main(int argc, char * argv[]) {
   }
 
      
-#if 0
+#if 1
   std::ofstream fout;
   fout.open("profile.txt");
-  for_vi(c,i) {
-       fout << c.xc(i) << "  " << c[i][1][1] << "\n";
+  for_vj(c,j) {
+       fout << c.yc(j) << "  " << c[1][j][1] << "\n";
   }
   fout.close();
   return 0;

@@ -1,15 +1,24 @@
 #include "Include/psi-boil.h"
 #include <fstream>
 
+#define _GNU_SOURCE 1
+#include <fenv.h>
+static void __attribute__ ((constructor)) trapfpe(void)
+{
+  /* Enable some exceptions. At startup all exceptions are masked. */
+  feenableexcept(FE_INVALID|FE_DIVBYZERO|FE_OVERFLOW);
+}
+
+
 /* domain dimensions (given by problem) */
 //const real LX =   0.5;
-const real LX =   0.25;
-const real LY =   0.016;
+const real LX =   0.1;
+const real LY =   0.008;
 const real LZ =   0.008;
 
 /* computed parameters */
 //const int NX = 4;
-const int NX = 125;
+const int NX = 50;
 const int NY = 4;
 const int NZ = 4;
 
@@ -26,10 +35,12 @@ main(int argc, char * argv[]) {
   /*----------+
   |  grid(s)  |
   +----------*/
-  //Grid1D gx( Range<real>( 0,LX), NX, Periodic::no() );
   Grid1D gx( Range<real>( 0,LX), NX, Periodic::yes() );
+//  Grid1D gx( Range<real>( 0,LX), Range<real>(LX/(2.0 * NX),LX/(2.0 * NX)), NX, Periodic::yes() );
   Grid1D gy( Range<real>( 0,LY), NY, Periodic::yes());
+//  Grid1D gy( Range<real>( 0,LY), Range<real>(LY/(2.0 * NY),LY/(2.0 * NY)), NY, Periodic::yes() );
   Grid1D gz( Range<real>( 0,LZ), NZ, Periodic::yes() );
+//  Grid1D gz( Range<real>( 0,LZ), Range<real>(LZ/(2.0 * NZ),LZ/(2.0 * NZ)), NZ, Periodic::yes() );
 
   /*---------+
   |  domain  |
@@ -39,7 +50,7 @@ main(int argc, char * argv[]) {
   /*-------------------+
   |  time-integration  |
   +-------------------*/
-  const int  ndt = 10000;
+  const int  ndt = 1000;
   //const int ndt = 1;
   const int nint = 50;
   const real dt  = 0.25 * LX / real(NX);
@@ -104,10 +115,15 @@ main(int argc, char * argv[]) {
 
 #if 1
   for_vijk(c,i,j,k) {
-    if( 0.10 < c.xc(i) && c.xc(i) < 0.15 ){
+    if( 0.024 < c.xc(i) && c.xc(i) < 0.075 ){
           c[i][j][k]=1.0;
     }
   }
+
+  //std::cout<<"c50 "<<c[50][1][1]<<" "<<"c51 "<<c[51][1][1]<<"\n"; 
+
+  //std::cout<<"c75 "<<c[75][1][1]<<" "<<"c76 "<<c[76][1][1]<<"\n"; 
+
 #else
   for_vijk(c,i,j,k) {
     c[i][j][k]=std::min(1.0,c.xc(i)*5.0);
@@ -115,7 +131,7 @@ main(int argc, char * argv[]) {
   }
 #endif
   
-  c.exchange();
+  c.exchange_all();
   c.bnd_update();
   boil::plot->plot(uvw,c, "uvw-c-init0", 0);
 
@@ -150,7 +166,13 @@ main(int argc, char * argv[]) {
     |  fully explicit with conc  |
     +---------------------------*/
    // new_time_step();
-    conc.upwind_advance();
+
+    //std::cout<<"c50 before advance "<<c[50][1][1]<<" "<<"c51 before advance "<<c[51][1][1]<<"\n";
+    //std::cout<<"c75 before advance "<<c[75][1][1]<<" "<<"c76 before advance "<<c[76][1][1]<<"\n"; 
+    conc.advance();
+    conc.totalvol();
+    //std::cout<<"c50 after advance "<<c[50][1][1]<<" "<<"c51 after advance "<<c[51][1][1]<<"\n"; 
+    //std::cout<<"c75 after advance "<<c[75][1][1]<<" "<<"c76 after advance "<<c[76][1][1]<<"\n"; 
     //conc.convection();
     //conc.advance();
     //conc.sharpen();
@@ -162,6 +184,7 @@ main(int argc, char * argv[]) {
 
   }
 
+     
 #if 1
   std::ofstream fout;
   fout.open("profile.txt");

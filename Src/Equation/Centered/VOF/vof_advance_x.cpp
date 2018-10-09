@@ -22,6 +22,7 @@ void VOF::advance_x() {
   }
 
   Comp m = Comp::u();
+  std::cout<<"Debug 0 "<<"\n";
   for_vmijk((*u),m,i,j,k){
 
     // flux
@@ -37,16 +38,17 @@ void VOF::advance_x() {
     g = ((*u)[m][i][j][k])*dt/phi.dxc(i-1);
     if((*u)[m][i][j][k]<0.0) g = ((*u)[m][i][j][k])*dt/phi.dxc(i);
 
-    if (approx(phi[iup][j][k], 0.0)) {
+    if (approx(phi[iup][j][k], 0.0, 1e-6)) {
 
       f = 0.0 * g;
 
-    } else if(approx(phi[iup][j][k],1.0)) {
+    } else if(approx(phi[iup][j][k],1.0, 1e-6)) {
 
       f = 1.0 * g;
 
     } else {
 
+      std::cout<<"iup= "<<iup<<" j= "<<j<<" k= "<<k<<"\n";
       // color function upwind
       real c = phi[iup][j][k];
 
@@ -56,6 +58,8 @@ void VOF::advance_x() {
       vn2 = -ny[iup][j][k];
       vn3 = -nz[iup][j][k];
 
+      std::cout<<"n= "<<vn1<<" "<<vn2<<" "<<vn3<<"\n";
+
       real absg = fabs(g);
       real vm1 = fabs(vn1);
       real vm2 = fabs(vn2);
@@ -64,6 +68,8 @@ void VOF::advance_x() {
       vm1 *= qa;
       vm2 *= qa;
       vm3 *= qa;
+    //  std::cout<<"Test 0 "<<"\n";
+    //  std::cout<<"i= "<<i-1<<" j= "<<j-1<<" k= "<<k-1<<"\n";
       real alpha = calc_alpha(c, vm1, vm2, vm3);
       
       real ra = vm1 * (1.0 - absg);
