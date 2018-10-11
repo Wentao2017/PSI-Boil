@@ -16,16 +16,14 @@ void VOF::advance() {
   // advance in z-direction
  //  advance_z();
 
-  // store
-  for_ijk(i,j,k){
-    stmp[i][j][k]=phi[i][j][k] * dV(i,j,k);
-  }
-
+ 
+  flx.exchange();
+  
   for_ijk(i,j,k){
     real phi_tmp = phi[i][j][k] * dV(i,j,k);
-    phi_tmp += -flx[Comp::u()][i][j][k] + flx[Comp::u()][i+1][j][k]
-               -flx[Comp::v()][i][j][k] + flx[Comp::v()][i][j+1][k]
-               -flx[Comp::w()][i][j][k] + flx[Comp::w()][i][j][k+1];
+    phi_tmp +=  flx[Comp::u()][i][j][k] - flx[Comp::u()][i+1][j][k]
+              + flx[Comp::v()][i][j][k] - flx[Comp::v()][i][j+1][k]
+              + flx[Comp::w()][i][j][k] - flx[Comp::w()][i][j][k+1];
     phi_tmp /= dV(i,j,k);
     phi[i][j][k] = std::min(1.0,std::max(0.0,phi_tmp));
 

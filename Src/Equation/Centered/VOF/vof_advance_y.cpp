@@ -26,7 +26,7 @@ void VOF::advance_y() {
       f = phi[i][jup][k] * g;
       //f = 0.0 * g;
 
-    } else if(phi[i][jup][k]<1.0-boil::pico) {
+    } else if(phi[i][jup][k]>1.0-boil::pico) {
 
       f = phi[i][jup][k] * g;
       //f = 1.0 * g;
