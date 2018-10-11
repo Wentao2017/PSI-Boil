@@ -77,6 +77,7 @@ class VOF : public Centered {
     Scalar a;
     Scalar vv;
     Scalar flux_x;
+    Vector flx;
 
     Matter jelly;   /* virtual fluid for level set transport */
     real xminft,xmaxft,yminft,ymaxft,zminft,zmaxft; /* xyz min&max of front */

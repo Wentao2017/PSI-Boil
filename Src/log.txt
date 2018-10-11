@@ -1,0 +1,607 @@
+________________________________________________________________________________
+      ______     ______   _____        ______     _____    _____   _ 
+     (_____ \   / _____) (_____)      (_____ \   / ___ \  (_____) | |
+      _____) ) ( (____      _    ___   _____) ) | |   | |    _    | |
+     |  ____/   \____ \    | |  (___) |  ___ (  | |   | |   | |   | |
+     | |        _____) )  _| |_       | |___) ) | |___| |  _| |_  | |_____
+     |_|       (______/  (_____)      |______/   \_____/  (_____) |_______)
+________________________________________________________________________________
+                             Thu Oct 11 10:28:33 2018
+
+Domain level 3 created !
+Domain level 2 created !
+Domain level 1 created !
+Domain decomposed into 1 x 1 x 1 blocks.
++===================================================+
+| Grid statistics:                                  |
++---------------------------------------------------+
+| resolution; nx, ny, nz =    100,    100,      4.  |
++-------------------------+-------------------------+
+| min x    = -5.00000e-01 | min dx   =  1.00000e-02 |
+| max x    =  5.00000e-01 | max dx   =  1.00000e-02 |
+| min y    = -5.00000e-01 | min dy   =  1.00000e-02 |
+| max y    =  5.00000e-01 | max dy   =  1.00000e-02 |
+| min z    = -2.50000e-02 | min dz   =  1.25000e-02 |
+| max z    =  2.50000e-02 | max dz   =  1.25000e-02 |
++-------------------------+-------------------------+
+| lx       =  1.00000e+00 | min dV   =  1.25000e-06 |
+| ly       =  1.00000e+00 | max dV   =  1.25000e-06 |
+| lz       =  5.00000e-02 | max a.r. =  1.25000e+00 |
++-------------------------+-------------------------+
+##############################################
+#                                             
+# TOTAL NUMBER OF TIME STEP: 1
+#                                             
+# TOTAL SIMULATION TIME:     0.0025
+#                                             
+##############################################
+FILE: main.cpp, LINE: 85, NX = 100
+FILE: main.cpp, LINE: 86, dt = 0.0025
+FILE: main.cpp, LINE: 87, ndt = 1
+# Plotting: c_000000.dat
+#############################################
+#                                            
+# STEP: 1 / 1
+#                                            
+# TIME: 0 / 0.0025
+#                 
+# WALL: 0.00133333 [min]; 2.22222e-05 [h]
+#                                            
+#############################################
+########################
+#                       
+# TIME:      0
+#                       
+# TIME STEP: 1/1
+#                       
+########################
+phi 1 i 37 jup 45 k 1
+phi 1 i 37 jup 45 k 2
+phi 1 i 37 jup 45 k 4
+phi 1 i 37 jup 48 k 1
+phi 1 i 37 jup 48 k 2
+phi 1 i 37 jup 48 k 4
+phi 1 i 37 jup 51 k 1
+phi 1 i 37 jup 51 k 2
+phi 1 i 37 jup 51 k 4
+phi 1 i 37 jup 54 k 1
+phi 1 i 37 jup 54 k 2
+phi 1 i 37 jup 54 k 4
+phi 1 i 38 jup 45 k 1
+phi 1 i 38 jup 45 k 2
+phi 1 i 38 jup 45 k 3
+phi 1 i 38 jup 45 k 4
+phi 1.00139 i 38 jup 46 k 1
+phi 1.00139 i 38 jup 46 k 2
+phi 1.00069 i 38 jup 46 k 3
+phi 1.00069 i 38 jup 46 k 4
+phi 1.00003 i 38 jup 48 k 1
+phi 1.00003 i 38 jup 48 k 2
+phi 1.00003 i 38 jup 48 k 3
+phi 1.00003 i 38 jup 48 k 4
+phi 1.00008 i 38 jup 53 k 1
+phi 1.00008 i 38 jup 53 k 2
+phi 1.00008 i 38 jup 53 k 3
+phi 1.00008 i 38 jup 53 k 4
+phi 1 i 38 jup 54 k 1
+phi 1 i 38 jup 54 k 2
+phi 1 i 38 jup 54 k 3
+phi 1 i 38 jup 54 k 4
+phi 1 i 39 jup 41 k 4
+phi 1 i 39 jup 42 k 3
+phi 1.00012 i 39 jup 44 k 1
+phi 1.00012 i 39 jup 44 k 2
+phi 1.00013 i 39 jup 44 k 3
+phi 1.00012 i 39 jup 44 k 4
+phi 1.00129 i 39 jup 46 k 1
+phi 1.00129 i 39 jup 46 k 2
+phi 1.00059 i 39 jup 46 k 3
+phi 1.00059 i 39 jup 46 k 4
+phi 1.00002 i 39 jup 48 k 1
+phi 1.00002 i 39 jup 48 k 2
+phi 1 i 39 jup 48 k 3
+phi 1.00012 i 39 jup 55 k 1
+phi 1.00012 i 39 jup 55 k 2
+phi 1.00013 i 39 jup 55 k 3
+phi 1.00012 i 39 jup 55 k 4
+phi 1 i 39 jup 58 k 3
+phi 1 i 40 jup 42 k 1
+phi 1 i 40 jup 42 k 2
+phi 1.00015 i 40 jup 43 k 1
+phi 1.00015 i 40 jup 43 k 2
+phi 1.00015 i 40 jup 43 k 3
+phi 1.00015 i 40 jup 43 k 4
+phi 1.00059 i 40 jup 46 k 3
+phi 1.00059 i 40 jup 46 k 4
+phi 1.00087 i 40 jup 47 k 1
+phi 1.00087 i 40 jup 47 k 2
+phi 1.00012 i 40 jup 55 k 3
+phi 1.00013 i 40 jup 55 k 4
+phi 1.00017 i 40 jup 57 k 1
+phi 1.00017 i 40 jup 57 k 2
+phi 1.00151 i 40 jup 57 k 3
+phi 1.00151 i 40 jup 57 k 4
+phi 1 i 40 jup 58 k 1
+phi 1 i 40 jup 58 k 2
+phi 1 i 40 jup 58 k 4
+phi 1.00169 i 41 jup 41 k 1
+phi 1.0032 i 41 jup 41 k 2
+phi 1.00169 i 41 jup 41 k 3
+phi 1.00169 i 41 jup 41 k 4
+phi 1.00015 i 41 jup 43 k 1
+phi 1.00015 i 41 jup 43 k 2
+phi 1.00015 i 41 jup 43 k 3
+phi 1.00015 i 41 jup 43 k 4
+phi 1.00059 i 41 jup 46 k 1
+phi 1.00059 i 41 jup 46 k 4
+phi 1.00087 i 41 jup 47 k 2
+phi 1.00039 i 41 jup 47 k 3
+phi 1.00013 i 41 jup 55 k 1
+phi 1.00013 i 41 jup 55 k 4
+phi 1.00131 i 41 jup 57 k 1
+phi 1.00131 i 41 jup 57 k 4
+phi 1.0002 i 41 jup 58 k 1
+phi 1.0002 i 41 jup 58 k 2
+phi 1.0002 i 41 jup 58 k 3
+phi 1.0002 i 41 jup 58 k 4
+phi 1 i 41 jup 60 k 3
+phi 1 i 42 jup 39 k 1
+phi 1 i 42 jup 39 k 2
+phi 1.00136 i 42 jup 40 k 1
+phi 1.00022 i 42 jup 40 k 2
+phi 1.00022 i 42 jup 40 k 3
+phi 1.00136 i 42 jup 40 k 4
+phi 1.001 i 42 jup 41 k 3
+phi 1.00018 i 42 jup 42 k 1
+phi 1.00015 i 42 jup 43 k 3
+phi 1.00015 i 42 jup 43 k 4
+phi 1.00039 i 42 jup 46 k 1
+phi 1.00039 i 42 jup 46 k 4
+phi 1.00025 i 42 jup 47 k 3
+phi 1.00002 i 42 jup 48 k 1
+phi 1.00012 i 42 jup 55 k 1
+phi 1.00012 i 42 jup 55 k 4
+phi 1.00088 i 42 jup 57 k 1
+phi 1.00088 i 42 jup 57 k 4
+phi 1.00022 i 42 jup 59 k 1
+phi 1.00022 i 42 jup 59 k 2
+phi 1.00023 i 42 jup 59 k 3
+phi 1.00022 i 42 jup 59 k 4
+phi 1 i 42 jup 60 k 1
+phi 1 i 42 jup 60 k 2
+phi 1 i 42 jup 60 k 3
+phi 1 i 43 jup 38 k 4
+phi 1.00025 i 43 jup 39 k 1
+phi 1.00025 i 43 jup 39 k 2
+phi 1.00025 i 43 jup 39 k 3
+phi 1.00025 i 43 jup 39 k 4
+phi 1.00025 i 43 jup 60 k 1
+phi 1.00025 i 43 jup 60 k 2
+phi 1.00025 i 43 jup 60 k 3
+phi 1.00025 i 43 jup 60 k 4
+phi 1 i 43 jup 61 k 4
+phi 1 i 44 jup 38 k 1
+phi 1 i 44 jup 38 k 2
+phi 1 i 44 jup 38 k 3
+phi 1 i 44 jup 38 k 4
+phi 1.00025 i 44 jup 39 k 1
+phi 1.00025 i 44 jup 39 k 2
+phi 1.00025 i 44 jup 39 k 3
+phi 1.00025 i 44 jup 39 k 4
+phi 1.00162 i 44 jup 40 k 1
+phi 1.00162 i 44 jup 40 k 4
+phi 1.00018 i 44 jup 42 k 1
+phi 1.00018 i 44 jup 42 k 4
+phi 1.00059 i 44 jup 46 k 1
+phi 1.00059 i 44 jup 46 k 4
+phi 1.00003 i 44 jup 48 k 1
+phi 1.00003 i 44 jup 48 k 4
+phi 1.00013 i 44 jup 55 k 1
+phi 1.00013 i 44 jup 55 k 4
+phi 1.00131 i 44 jup 57 k 1
+phi 1.00131 i 44 jup 57 k 4
+phi 1.00025 i 44 jup 60 k 1
+phi 1.00025 i 44 jup 60 k 2
+phi 1.00025 i 44 jup 60 k 3
+phi 1.00025 i 44 jup 60 k 4
+phi 1 i 44 jup 61 k 1
+phi 1 i 44 jup 61 k 2
+phi 1 i 44 jup 61 k 3
+phi 1 i 44 jup 61 k 4
+phi 1.00028 i 45 jup 38 k 1
+phi 1.00028 i 45 jup 38 k 2
+phi 1.00028 i 45 jup 38 k 3
+phi 1.00028 i 45 jup 38 k 4
+phi 1.00162 i 45 jup 40 k 1
+phi 1.00324 i 45 jup 40 k 2
+phi 1.00324 i 45 jup 40 k 3
+phi 1.00162 i 45 jup 40 k 4
+phi 1.00018 i 45 jup 42 k 1
+phi 1.00018 i 45 jup 42 k 2
+phi 1.00018 i 45 jup 42 k 3
+phi 1.00017 i 45 jup 42 k 4
+phi 1.00059 i 45 jup 46 k 1
+phi 1.00129 i 45 jup 46 k 2
+phi 1.00129 i 45 jup 46 k 3
+phi 1.00059 i 45 jup 46 k 4
+phi 1.00003 i 45 jup 48 k 1
+phi 1.00003 i 45 jup 48 k 2
+phi 1.00003 i 45 jup 48 k 3
+phi 1.00002 i 45 jup 48 k 4
+phi 1.00013 i 45 jup 55 k 1
+phi 1.00013 i 45 jup 55 k 2
+phi 1.00013 i 45 jup 55 k 3
+phi 1.00012 i 45 jup 55 k 4
+phi 1.00131 i 45 jup 57 k 1
+phi 1.00269 i 45 jup 57 k 2
+phi 1.00269 i 45 jup 57 k 3
+phi 1.00131 i 45 jup 57 k 4
+phi 1.00028 i 45 jup 61 k 1
+phi 1.00028 i 45 jup 61 k 2
+phi 1.00028 i 45 jup 61 k 3
+phi 1.00028 i 45 jup 61 k 4
+phi 1.00028 i 46 jup 38 k 1
+phi 1.00028 i 46 jup 38 k 2
+phi 1.00028 i 46 jup 38 k 3
+phi 1.00028 i 46 jup 38 k 4
+phi 1.00162 i 46 jup 40 k 1
+phi 1.00324 i 46 jup 40 k 2
+phi 1.00324 i 46 jup 40 k 3
+phi 1.00162 i 46 jup 40 k 4
+phi 1.00018 i 46 jup 42 k 2
+phi 1.00017 i 46 jup 42 k 3
+phi 1.00015 i 46 jup 43 k 1
+phi 1.00015 i 46 jup 43 k 4
+phi 1.00059 i 46 jup 46 k 1
+phi 1.00129 i 46 jup 46 k 2
+phi 1.00129 i 46 jup 46 k 3
+phi 1.00059 i 46 jup 46 k 4
+phi 1.00002 i 46 jup 48 k 2
+phi 1.00002 i 46 jup 48 k 3
+phi 1.00012 i 46 jup 55 k 1
+phi 1.00012 i 46 jup 55 k 2
+phi 1.00012 i 46 jup 55 k 3
+phi 1.00013 i 46 jup 55 k 4
+phi 1.00131 i 46 jup 57 k 1
+phi 1.00269 i 46 jup 57 k 2
+phi 1.00269 i 46 jup 57 k 3
+phi 1.00131 i 46 jup 57 k 4
+phi 1.00028 i 46 jup 61 k 1
+phi 1.00028 i 46 jup 61 k 2
+phi 1.00028 i 46 jup 61 k 3
+phi 1.00028 i 46 jup 61 k 4
+phi 1.0003 i 47 jup 37 k 1
+phi 1.0003 i 47 jup 37 k 2
+phi 1.0003 i 47 jup 37 k 3
+phi 1.0003 i 47 jup 37 k 4
+phi 1.00281 i 47 jup 41 k 1
+phi 1.00297 i 47 jup 41 k 2
+phi 1.00297 i 47 jup 41 k 3
+phi 1.00281 i 47 jup 41 k 4
+phi 1.00015 i 47 jup 43 k 1
+phi 1.00015 i 47 jup 43 k 2
+phi 1.00015 i 47 jup 43 k 3
+phi 1.00015 i 47 jup 43 k 4
+phi 1.00086 i 47 jup 47 k 1
+phi 1.00087 i 47 jup 47 k 2
+phi 1.00087 i 47 jup 47 k 3
+phi 1.00086 i 47 jup 47 k 4
+phi 1.0003 i 47 jup 62 k 1
+phi 1.0003 i 47 jup 62 k 2
+phi 1.0003 i 47 jup 62 k 3
+phi 1.0003 i 47 jup 62 k 4
+phi 1 i 47 jup 63 k 3
+phi 1.0003 i 48 jup 37 k 1
+phi 1.0003 i 48 jup 37 k 2
+phi 1.0003 i 48 jup 37 k 3
+phi 1.0003 i 48 jup 37 k 4
+phi 1.00297 i 48 jup 41 k 1
+phi 1.00297 i 48 jup 41 k 2
+phi 1.00297 i 48 jup 41 k 3
+phi 1.00297 i 48 jup 41 k 4
+phi 1.00015 i 48 jup 43 k 1
+phi 1.00015 i 48 jup 43 k 2
+phi 1.00015 i 48 jup 43 k 3
+phi 1.00015 i 48 jup 43 k 4
+phi 1.00087 i 48 jup 47 k 1
+phi 1.00087 i 48 jup 47 k 2
+phi 1.00087 i 48 jup 47 k 3
+phi 1.00087 i 48 jup 47 k 4
+phi 1.0003 i 48 jup 62 k 1
+phi 1.0003 i 48 jup 62 k 2
+phi 1.0003 i 48 jup 62 k 3
+phi 1.0003 i 48 jup 62 k 4
+phi 1.0003 i 49 jup 37 k 1
+phi 1.0003 i 49 jup 37 k 2
+phi 1.0003 i 49 jup 37 k 3
+phi 1.0003 i 49 jup 37 k 4
+phi 1.0003 i 49 jup 62 k 1
+phi 1.0003 i 49 jup 62 k 2
+phi 1.0003 i 49 jup 62 k 3
+phi 1.0003 i 49 jup 62 k 4
+phi 1.0003 i 50 jup 37 k 1
+phi 1.0003 i 50 jup 37 k 2
+phi 1.0003 i 50 jup 37 k 3
+phi 1.0003 i 50 jup 37 k 4
+phi 1.0003 i 50 jup 62 k 1
+phi 1.0003 i 50 jup 62 k 2
+phi 1.0003 i 50 jup 62 k 3
+phi 1.0003 i 50 jup 62 k 4
+phi 1 i 50 jup 63 k 3
+phi 1.0003 i 51 jup 37 k 1
+phi 1.0003 i 51 jup 37 k 2
+phi 1.0003 i 51 jup 37 k 3
+phi 1.0003 i 51 jup 37 k 4
+phi 1.00324 i 51 jup 40 k 1
+phi 1.00324 i 51 jup 40 k 2
+phi 1.00324 i 51 jup 40 k 3
+phi 1.00324 i 51 jup 40 k 4
+phi 1.00018 i 51 jup 42 k 1
+phi 1.00018 i 51 jup 42 k 2
+phi 1.00018 i 51 jup 42 k 3
+phi 1.00018 i 51 jup 42 k 4
+phi 1.00129 i 51 jup 46 k 1
+phi 1.00129 i 51 jup 46 k 2
+phi 1.00129 i 51 jup 46 k 3
+phi 1.00129 i 51 jup 46 k 4
+phi 1.00003 i 51 jup 48 k 1
+phi 1.00003 i 51 jup 48 k 2
+phi 1.00003 i 51 jup 48 k 3
+phi 1.00003 i 51 jup 48 k 4
+phi 1.00013 i 51 jup 55 k 1
+phi 1.00013 i 51 jup 55 k 2
+phi 1.00013 i 51 jup 55 k 3
+phi 1.00013 i 51 jup 55 k 4
+phi 1.00269 i 51 jup 57 k 1
+phi 1.00269 i 51 jup 57 k 2
+phi 1.00269 i 51 jup 57 k 3
+phi 1.00269 i 51 jup 57 k 4
+phi 1.0003 i 51 jup 62 k 1
+phi 1.0003 i 51 jup 62 k 2
+phi 1.0003 i 51 jup 62 k 3
+phi 1.0003 i 51 jup 62 k 4
+phi 1 i 51 jup 63 k 3
+phi 1.0003 i 52 jup 37 k 1
+phi 1.0003 i 52 jup 37 k 2
+phi 1.0003 i 52 jup 37 k 3
+phi 1.0003 i 52 jup 37 k 4
+phi 1.00324 i 52 jup 40 k 1
+phi 1.00324 i 52 jup 40 k 2
+phi 1.00324 i 52 jup 40 k 3
+phi 1.00324 i 52 jup 40 k 4
+phi 1.00018 i 52 jup 42 k 1
+phi 1.00018 i 52 jup 42 k 2
+phi 1.00017 i 52 jup 42 k 3
+phi 1.00017 i 52 jup 42 k 4
+phi 1.00129 i 52 jup 46 k 1
+phi 1.00129 i 52 jup 46 k 2
+phi 1.00129 i 52 jup 46 k 3
+phi 1.00129 i 52 jup 46 k 4
+phi 1.00002 i 52 jup 48 k 1
+phi 1.00002 i 52 jup 48 k 2
+phi 1.00002 i 52 jup 48 k 3
+phi 1.00002 i 52 jup 48 k 4
+phi 1.00012 i 52 jup 55 k 1
+phi 1.00012 i 52 jup 55 k 2
+phi 1.00012 i 52 jup 55 k 3
+phi 1.00012 i 52 jup 55 k 4
+phi 1.00269 i 52 jup 57 k 1
+phi 1.00269 i 52 jup 57 k 2
+phi 1.00269 i 52 jup 57 k 3
+phi 1.00269 i 52 jup 57 k 4
+phi 1.0003 i 52 jup 62 k 1
+phi 1.0003 i 52 jup 62 k 2
+phi 1.0003 i 52 jup 62 k 3
+phi 1.0003 i 52 jup 62 k 4
+phi 1.0003 i 53 jup 37 k 1
+phi 1.0003 i 53 jup 37 k 2
+phi 1.0003 i 53 jup 37 k 3
+phi 1.0003 i 53 jup 37 k 4
+phi 1.00297 i 53 jup 41 k 1
+phi 1.00297 i 53 jup 41 k 2
+phi 1.00297 i 53 jup 41 k 3
+phi 1.00298 i 53 jup 41 k 4
+phi 1.00015 i 53 jup 43 k 1
+phi 1.00015 i 53 jup 43 k 2
+phi 1.00015 i 53 jup 43 k 3
+phi 1.00015 i 53 jup 43 k 4
+phi 1.00087 i 53 jup 47 k 1
+phi 1.00087 i 53 jup 47 k 2
+phi 1.00087 i 53 jup 47 k 3
+phi 1.00087 i 53 jup 47 k 4
+phi 1.0003 i 53 jup 62 k 1
+phi 1.0003 i 53 jup 62 k 2
+phi 1.0003 i 53 jup 62 k 3
+phi 1.0003 i 53 jup 62 k 4
+phi 1 i 53 jup 63 k 3
+phi 1.0003 i 54 jup 37 k 1
+phi 1.0003 i 54 jup 37 k 2
+phi 1.0003 i 54 jup 37 k 3
+phi 1.0003 i 54 jup 37 k 4
+phi 1.00324 i 54 jup 40 k 1
+phi 1.00324 i 54 jup 40 k 2
+phi 1.00324 i 54 jup 40 k 3
+phi 1.00324 i 54 jup 40 k 4
+phi 1.00015 i 54 jup 43 k 1
+phi 1.00015 i 54 jup 43 k 2
+phi 1.00015 i 54 jup 43 k 3
+phi 1.00015 i 54 jup 43 k 4
+phi 1.00129 i 54 jup 46 k 1
+phi 1.00129 i 54 jup 46 k 2
+phi 1.00129 i 54 jup 46 k 3
+phi 1.00129 i 54 jup 46 k 4
+phi 1.00013 i 54 jup 55 k 1
+phi 1.00013 i 54 jup 55 k 2
+phi 1.00013 i 54 jup 55 k 3
+phi 1.00013 i 54 jup 55 k 4
+phi 1.00269 i 54 jup 57 k 1
+phi 1.00269 i 54 jup 57 k 2
+phi 1.00269 i 54 jup 57 k 3
+phi 1.00269 i 54 jup 57 k 4
+phi 1.0003 i 54 jup 62 k 1
+phi 1.0003 i 54 jup 62 k 2
+phi 1.0003 i 54 jup 62 k 3
+phi 1.0003 i 54 jup 62 k 4
+phi 1 i 54 jup 63 k 3
+phi 1.00028 i 55 jup 38 k 1
+phi 1.00028 i 55 jup 38 k 2
+phi 1.00028 i 55 jup 38 k 3
+phi 1.00028 i 55 jup 38 k 4
+phi 1.00324 i 55 jup 40 k 1
+phi 1.00324 i 55 jup 40 k 2
+phi 1.00324 i 55 jup 40 k 3
+phi 1.00324 i 55 jup 40 k 4
+phi 1.00018 i 55 jup 42 k 2
+phi 1.00017 i 55 jup 42 k 3
+phi 1.00015 i 55 jup 43 k 1
+phi 1.00015 i 55 jup 43 k 4
+phi 1.00129 i 55 jup 46 k 1
+phi 1.00129 i 55 jup 46 k 2
+phi 1.00129 i 55 jup 46 k 3
+phi 1.00129 i 55 jup 46 k 4
+phi 1.00002 i 55 jup 48 k 2
+phi 1.00002 i 55 jup 48 k 3
+phi 1.00012 i 55 jup 55 k 1
+phi 1.00012 i 55 jup 55 k 2
+phi 1.00012 i 55 jup 55 k 3
+phi 1.00012 i 55 jup 55 k 4
+phi 1.00269 i 55 jup 57 k 1
+phi 1.00269 i 55 jup 57 k 2
+phi 1.00269 i 55 jup 57 k 3
+phi 1.00269 i 55 jup 57 k 4
+phi 1.00028 i 55 jup 61 k 1
+phi 1.00028 i 55 jup 61 k 2
+phi 1.00028 i 55 jup 61 k 3
+phi 1.00028 i 55 jup 61 k 4
+phi 1.00028 i 56 jup 38 k 1
+phi 1.00028 i 56 jup 38 k 2
+phi 1.00028 i 56 jup 38 k 3
+phi 1.00028 i 56 jup 38 k 4
+phi 1.00028 i 56 jup 61 k 1
+phi 1.00028 i 56 jup 61 k 2
+phi 1.00028 i 56 jup 61 k 3
+phi 1.00028 i 56 jup 61 k 4
+phi 1 i 57 jup 38 k 1
+phi 1 i 57 jup 38 k 2
+phi 1 i 57 jup 38 k 3
+phi 1 i 57 jup 38 k 4
+phi 1.00025 i 57 jup 39 k 1
+phi 1.00025 i 57 jup 39 k 2
+phi 1.00025 i 57 jup 39 k 3
+phi 1.00025 i 57 jup 39 k 4
+phi 1.00025 i 57 jup 60 k 1
+phi 1.00025 i 57 jup 60 k 2
+phi 1.00025 i 57 jup 60 k 3
+phi 1.00025 i 57 jup 60 k 4
+phi 1 i 57 jup 61 k 1
+phi 1 i 57 jup 61 k 2
+phi 1 i 57 jup 61 k 3
+phi 1 i 57 jup 61 k 4
+phi 1.00025 i 58 jup 39 k 1
+phi 1.00025 i 58 jup 39 k 2
+phi 1.00025 i 58 jup 39 k 3
+phi 1.00025 i 58 jup 39 k 4
+phi 1.00025 i 58 jup 60 k 1
+phi 1.00025 i 58 jup 60 k 2
+phi 1.00025 i 58 jup 60 k 3
+phi 1.00025 i 58 jup 60 k 4
+phi 1.00022 i 59 jup 40 k 1
+phi 1.00022 i 59 jup 40 k 2
+phi 1.00022 i 59 jup 40 k 3
+phi 1.00022 i 59 jup 40 k 4
+phi 1.00022 i 59 jup 59 k 1
+phi 1.00022 i 59 jup 59 k 2
+phi 1.00022 i 59 jup 59 k 3
+phi 1.00022 i 59 jup 59 k 4
+phi 1.00122 i 60 jup 41 k 1
+phi 1.0032 i 60 jup 41 k 2
+phi 1.0032 i 60 jup 41 k 3
+phi 1.00122 i 60 jup 41 k 4
+phi 1.00015 i 60 jup 43 k 1
+phi 1.00015 i 60 jup 43 k 2
+phi 1.00015 i 60 jup 43 k 3
+phi 1.00015 i 60 jup 43 k 4
+phi 1.00025 i 60 jup 47 k 1
+phi 1.00087 i 60 jup 47 k 2
+phi 1.00087 i 60 jup 47 k 3
+phi 1.00025 i 60 jup 47 k 4
+phi 1.0002 i 60 jup 58 k 1
+phi 1.0002 i 60 jup 58 k 2
+phi 1.0002 i 60 jup 58 k 3
+phi 1.0002 i 60 jup 58 k 4
+phi 1 i 60 jup 60 k 3
+phi 1 i 61 jup 41 k 4
+phi 1 i 61 jup 42 k 1
+phi 1 i 61 jup 42 k 2
+phi 1 i 61 jup 42 k 3
+phi 1.00015 i 61 jup 43 k 1
+phi 1.00015 i 61 jup 43 k 2
+phi 1.00015 i 61 jup 43 k 3
+phi 1.00015 i 61 jup 43 k 4
+phi 1.00129 i 61 jup 46 k 1
+phi 1.00129 i 61 jup 46 k 2
+phi 1.00059 i 61 jup 46 k 3
+phi 1.00059 i 61 jup 46 k 4
+phi 1.00026 i 61 jup 47 k 3
+phi 1.00013 i 61 jup 55 k 1
+phi 1.00013 i 61 jup 55 k 2
+phi 1.00013 i 61 jup 55 k 3
+phi 1.00013 i 61 jup 55 k 4
+phi 1.00289 i 61 jup 57 k 1
+phi 1.00289 i 61 jup 57 k 2
+phi 1.00151 i 61 jup 57 k 3
+phi 1.00151 i 61 jup 57 k 4
+phi 1 i 61 jup 58 k 1
+phi 1 i 61 jup 58 k 2
+phi 1 i 61 jup 58 k 3
+phi 1 i 61 jup 58 k 4
+phi 1 i 62 jup 41 k 4
+phi 1 i 62 jup 42 k 3
+phi 1.00012 i 62 jup 44 k 1
+phi 1.00012 i 62 jup 44 k 2
+phi 1.00013 i 62 jup 44 k 3
+phi 1.00012 i 62 jup 44 k 4
+phi 1.00129 i 62 jup 46 k 1
+phi 1.00129 i 62 jup 46 k 2
+phi 1.00039 i 62 jup 46 k 3
+phi 1.00039 i 62 jup 46 k 4
+phi 1.00002 i 62 jup 48 k 4
+phi 1.00012 i 62 jup 55 k 1
+phi 1.00012 i 62 jup 55 k 2
+phi 1.00013 i 62 jup 55 k 3
+phi 1.00012 i 62 jup 55 k 4
+phi 1 i 62 jup 58 k 3
+phi 1 i 63 jup 45 k 1
+phi 1 i 63 jup 45 k 2
+phi 1 i 63 jup 45 k 3
+phi 1 i 63 jup 45 k 4
+phi 1.00049 i 63 jup 46 k 1
+phi 1.00139 i 63 jup 46 k 2
+phi 1.00139 i 63 jup 46 k 3
+phi 1.00069 i 63 jup 46 k 4
+phi 1.00003 i 63 jup 48 k 1
+phi 1.00003 i 63 jup 48 k 2
+phi 1.00003 i 63 jup 48 k 3
+phi 1.00003 i 63 jup 48 k 4
+phi 1.00008 i 63 jup 53 k 1
+phi 1.00008 i 63 jup 53 k 2
+phi 1.00008 i 63 jup 53 k 3
+phi 1.00008 i 63 jup 53 k 4
+phi 1 i 63 jup 54 k 1
+phi 1 i 63 jup 54 k 2
+phi 1 i 63 jup 54 k 3
+phi 1 i 63 jup 54 k 4
+phi 1 i 64 jup 45 k 4
+phi 1 i 64 jup 48 k 4
+phi 1 i 64 jup 51 k 4
+phi 1 i 64 jup 54 k 4
+totalvol:time,volume,phisum= 0.000000e+00 3.533982e-03
+# Plotting: uvw-c_000001.dat
+# Plotting: uvw-c_000000.dat
+finished
++==========================================
+| Total execution time: 0.29 [s]
++------------------------------------------
+| Time spent in plotting: 0.26 [s]    (89.6552%)
+| Time spent elsewhere  : 0.03 [s]    (10.3448%)
++------------------------------------------

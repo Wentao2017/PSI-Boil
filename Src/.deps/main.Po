@@ -523,10 +523,7 @@ main.o: main.cpp /usr/include/stdc-predef.h Include/psi-boil.h \
  Include/../Profile/../Global/global_precision.h \
  Include/../Profile/../Parallel/Out/out.h \
  Include/../Profile/../Parallel/Out/print.h Include/../Model/model.h \
- Include/../Model/../Equation/Staggered/Momentum/momentum.h \
- /afs/psi.ch/sys/psi.merlin/Programming/gcc/7.2.0/include/c++/7.2.0/fenv.h \
- /usr/include/fenv.h /usr/include/bits/fenv.h \
- /usr/include/bits/fenvinline.h
+ Include/../Model/../Equation/Staggered/Momentum/momentum.h
 
 /usr/include/stdc-predef.h:
 
@@ -1657,11 +1654,3 @@ Include/../Profile/../Parallel/Out/print.h:
 Include/../Model/model.h:
 
 Include/../Model/../Equation/Staggered/Momentum/momentum.h:
-
-/afs/psi.ch/sys/psi.merlin/Programming/gcc/7.2.0/include/c++/7.2.0/fenv.h:
-
-/usr/include/fenv.h:
-
-/usr/include/bits/fenv.h:
-
-/usr/include/bits/fenvinline.h:

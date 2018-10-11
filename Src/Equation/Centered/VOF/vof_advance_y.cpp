@@ -3,23 +3,7 @@
 /******************************************************************************/
 void VOF::advance_y() {
 
-  // calculate normal vector
-  gradphic(phi);
-  
-//boil::plot->plot(nx, ny, nz, "nx-ny-nz", time->current_step());
-#if 0
-  std::cout<<"nx50 "<<nx[50][1][1]<<" "<<"nx51 "<<nx[51][1][1]<<"\n";
-  std::cout<<"ny50 "<<ny[50][1][1]<<" "<<"ny51 "<<ny[51][1][1]<<"\n";
-  std::cout<<"nz50 "<<nz[50][1][1]<<" "<<"nz51 "<<nz[51][1][1]<<"\n";
-  std::cout<<"nx75 "<<nx[75][1][1]<<" "<<"nx76 "<<nx[76][1][1]<<"\n";
-  std::cout<<"ny75 "<<ny[75][1][1]<<" "<<"ny76 "<<ny[76][1][1]<<"\n";
-  std::cout<<"nz75 "<<nz[75][1][1]<<" "<<"nz76 "<<nz[76][1][1]<<"\n";
-#endif
- 
   // advance in the y-direction
-  for_ijk(i,j,k){
-    stmp[i][j][k]=phi[i][j][k] * dV(i,j,k);
-  }
 
   Comp m = Comp::v();
   for_vmijk((*u),m,i,j,k){
@@ -37,13 +21,15 @@ void VOF::advance_y() {
     g = ((*u)[m][i][j][k])*dt/phi.dyc(j-1);
     if((*u)[m][i][j][k]<0.0) g = ((*u)[m][i][j][k])*dt/phi.dyc(j);
 
-    if (approx(phi[i][jup][k], 0.0)) {
+    if (phi[i][jup][k]<boil::pico) {
 
-      f = 0.0 * g;
+      f = phi[i][jup][k] * g;
+      //f = 0.0 * g;
 
-    } else if(approx(phi[i][jup][k],1.0)) {
+    } else if(phi[i][jup][k]<1.0-boil::pico) {
 
-      f = 1.0 * g;
+      f = phi[i][jup][k] * g;
+      //f = 1.0 * g;
 
     } else {
 
@@ -77,18 +63,9 @@ void VOF::advance_y() {
     }
 
     // update color function store as stmp
-    stmp[i][j-1][k] = stmp[i][j-1][k]-f * dV(i,jup,k);
-    stmp[i  ][j][k] = stmp[i  ][j][k]+f * dV(i,jup,k);
+    flx[m][i][j][k] = f * dV(i,jup,k);
 
   }
-
-  // update phi
-  for_ijk(i,j,k){
-    real phi_tmp = stmp[i][j][k] / dV(i,j,k);
-    phi[i][j][k] = std::min(1.0,std::max(0.0,phi_tmp));
-  }
-  phi.bnd_update();
-  phi.exchange_all();
 
   //boil::plot->plot(flux_x, "flux_x", time->current_step());
  
