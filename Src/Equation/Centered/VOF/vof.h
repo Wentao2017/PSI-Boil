@@ -5,8 +5,6 @@
 #include "../centered.h"
 #include "../../../Parallel/communicator.h"
 
-#define USE_TAN
-
 ///////////
 //       //
 //  VOF  //
@@ -17,22 +15,18 @@ class VOF : public Centered {
     VOF(const Scalar & phi,
         const Scalar & f,
         const Scalar & kappa,
-        const real & con, 
-        const real & den,
         const Vector & u, 
         Times & t,
         Krylov * S);
     ~VOF();
 
+    void new_time_step(){};
     void advance();
+    void curvature();
     void tension(Vector * vec, const Matter matt);
     void totalvol();
     void front_minmax();
-    void init();
-    void upwind_advance();
-    void plic();
-//    void gradphic(const Scalar & g);
-//    void plane_vector_mc(real & r1, real & r2, real & r3);
+    void init(){};
 
     // getter for front_minmax
     real get_xminft() { return(xminft);};
@@ -46,49 +40,54 @@ class VOF : public Centered {
     void advance_x();
     void advance_y();
     void advance_z();
-    void curv(const Scalar & g);
     void bdcurv(const Scalar & g, const real & v);
+    void cal_fs();
+    void cal_fs2();
+    void curv_HF();
+    void ext_fs();
+    real extract_alpha(const int i, const int j, const int k);
     void insert_bc(const Scalar & g);
     void gradphi(const Scalar & g);
     void gradphic(const Scalar & g);
-    void plane_vector_mc();
     void insert_bc_gradphic(const Scalar & g);
+    void insert_bc_norm_cc(const Scalar & g);
     void insert_bc_norm();
+    void norm_cc(const Scalar & g);
     void normalize(real & r1, real & r2, real & r3);
-    void calc_alpha();
-    void calc_v();
     real calc_alpha(real & r1, real & r2, real & r3, real & r4);
     real calc_v(real r1, real r2, real r3, real r4);
+    void selectMax(const real r1, const real r2, const real r3,
+                   const real r4, const real r5, const real r6,
+                   const real r7, const real r8, const real r9,
+                   const int i1,  const int i2,  const int i3);
+    void set_iflag();
+    void insert_bc_flag(ScalarInt & g, const bool b);
+
+    void norm_cc_imin(const Scalar &g, const int i,const int j, const int k);
+    void norm_cc_imax(const Scalar &g, const int i,const int j, const int k);
+    void norm_cc_jmin(const Scalar &g, const int i,const int j, const int k);
+    void norm_cc_jmax(const Scalar &g, const int i,const int j, const int k);
+    void norm_cc_kmin(const Scalar &g, const int i,const int j, const int k);
+    void norm_cc_kmax(const Scalar &g, const int i,const int j, const int k);
+
 
     Scalar nx,ny,nz,nmag;/* normal to interface */
-    Scalar vma, vmb, vmc, vma_tmp, vmb_tmp, vmc_tmp;
-    Scalar vm1,vm2,vm3,vm12;
-    Scalar v1,v3;
-    Scalar a0,a1,a2;
-    Scalar q0,sp,th;
-    Scalar absgu, absgv;         /* absolute value of cfl number */
-    Scalar ra,qa; 
     Scalar clr,clrn;     /* color function */
-    Scalar gpx,gpy,gpz,gpxn,gpyn,gpzn;
-    Scalar w;
     Scalar kappa;        /* curvature */
     Scalar stmp;
-    Scalar alpha, alpha_tmp;    /* plane constant */
-    Scalar a;
-    Scalar vv;
-    Scalar flux_x;
-    Vector flx;
+    Scalar fsx,fsy,fsz;
+    ScalarInt iflag,iflagx,iflagy,iflagz;
 
     Matter jelly;   /* virtual fluid for level set transport */
     real xminft,xmaxft,yminft,ymaxft,zminft,zmaxft; /* xyz min&max of front */
-    real pi,tanfac,theta;
+    real pi,theta;
     real dxmin,ww;
     real epsnorm;
+    real phisurf;
     
-    int nlayer;
-    int *** iflag;
+    int nlayer, n_ext_fs;
+    //int *** iflag;
 };	
-
 #endif
 
 /*-----------------------------------------------------------------------------+

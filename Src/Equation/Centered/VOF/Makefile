@@ -99,14 +99,17 @@ libVof_a_LIBADD =
 am_libVof_a_OBJECTS = vof.$(OBJEXT) vof_advance.$(OBJEXT) \
 	vof_advance_x.$(OBJEXT) vof_advance_y.$(OBJEXT) \
 	vof_advance_z.$(OBJEXT) vof_bdcurv.$(OBJEXT) \
-	vof_curv.$(OBJEXT) vof_front_minmax.$(OBJEXT) \
-	vof_gradphi.$(OBJEXT) vof_insert_bc.$(OBJEXT) \
+	vof_calc_alpha.$(OBJEXT) vof_cal_fs.$(OBJEXT) \
+	vof_cal_fs2.$(OBJEXT) vof_calc_v.$(OBJEXT) \
+	vof_curvature.$(OBJEXT) vof_curv_HF.$(OBJEXT) \
+	vof_ext_fs.$(OBJEXT) vof_extract_alpha.$(OBJEXT) \
+	vof_front_minmax.$(OBJEXT) vof_gradphi.$(OBJEXT) \
+	vof_insert_bc.$(OBJEXT) vof_insert_bc_flag.$(OBJEXT) \
 	vof_tension.$(OBJEXT) vof_totalvol.$(OBJEXT) \
-	vof_upwind_advance.$(OBJEXT) vof_gradphic.$(OBJEXT) \
-	vof_insert_bc_gradphic.$(OBJEXT) vof_insert_bc_norm.$(OBJEXT) \
-	vof_normalize.$(OBJEXT) vof_plane_vector_mc.$(OBJEXT) \
-	vof_plic.$(OBJEXT) vof_calc_alpha.$(OBJEXT) \
-	vof_calc_v.$(OBJEXT)
+	vof_gradphic.$(OBJEXT) vof_insert_bc_gradphic.$(OBJEXT) \
+	vof_insert_bc_norm.$(OBJEXT) vof_insert_bc_norm_cc.$(OBJEXT) \
+	vof_normalize.$(OBJEXT) vof_norm_cc.$(OBJEXT) \
+	vof_set_iflag.$(OBJEXT)
 libVof_a_OBJECTS = $(am_libVof_a_OBJECTS)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
@@ -273,21 +276,27 @@ libVof_a_SOURCES = vof.h                 \
                         vof_advance_y.cpp     \
                         vof_advance_z.cpp     \
                         vof_bdcurv.cpp        \
-                        vof_curv.cpp          \
+                        vof_calc_alpha.cpp   \
+                        vof_cal_fs.cpp          \
+                        vof_cal_fs2.cpp          \
+                        vof_calc_v.cpp        \
+                        vof_curvature.cpp          \
+                        vof_curv_HF.cpp          \
+                        vof_ext_fs.cpp          \
+                        vof_extract_alpha.cpp          \
                         vof_front_minmax.cpp  \
                         vof_gradphi.cpp  \
                         vof_insert_bc.cpp     \
+                        vof_insert_bc_flag.cpp     \
                         vof_tension.cpp       \
                         vof_totalvol.cpp     \
-                        vof_upwind_advance.cpp \
                         vof_gradphic.cpp      \
                         vof_insert_bc_gradphic.cpp \
                         vof_insert_bc_norm.cpp \
+                        vof_insert_bc_norm_cc.cpp \
                         vof_normalize.cpp \
-                        vof_plane_vector_mc.cpp \
-                        vof_plic.cpp \
-                        vof_calc_alpha.cpp   \
-                        vof_calc_v.cpp  
+                        vof_norm_cc.cpp \
+                        vof_set_iflag.cpp
 
 INCLUDE = -I../../../../
 all: all-am
@@ -345,21 +354,27 @@ include ./$(DEPDIR)/vof_advance_x.Po
 include ./$(DEPDIR)/vof_advance_y.Po
 include ./$(DEPDIR)/vof_advance_z.Po
 include ./$(DEPDIR)/vof_bdcurv.Po
+include ./$(DEPDIR)/vof_cal_fs.Po
+include ./$(DEPDIR)/vof_cal_fs2.Po
 include ./$(DEPDIR)/vof_calc_alpha.Po
 include ./$(DEPDIR)/vof_calc_v.Po
-include ./$(DEPDIR)/vof_curv.Po
+include ./$(DEPDIR)/vof_curv_HF.Po
+include ./$(DEPDIR)/vof_curvature.Po
+include ./$(DEPDIR)/vof_ext_fs.Po
+include ./$(DEPDIR)/vof_extract_alpha.Po
 include ./$(DEPDIR)/vof_front_minmax.Po
 include ./$(DEPDIR)/vof_gradphi.Po
 include ./$(DEPDIR)/vof_gradphic.Po
 include ./$(DEPDIR)/vof_insert_bc.Po
+include ./$(DEPDIR)/vof_insert_bc_flag.Po
 include ./$(DEPDIR)/vof_insert_bc_gradphic.Po
 include ./$(DEPDIR)/vof_insert_bc_norm.Po
+include ./$(DEPDIR)/vof_insert_bc_norm_cc.Po
+include ./$(DEPDIR)/vof_norm_cc.Po
 include ./$(DEPDIR)/vof_normalize.Po
-include ./$(DEPDIR)/vof_plane_vector_mc.Po
-include ./$(DEPDIR)/vof_plic.Po
+include ./$(DEPDIR)/vof_set_iflag.Po
 include ./$(DEPDIR)/vof_tension.Po
 include ./$(DEPDIR)/vof_totalvol.Po
-include ./$(DEPDIR)/vof_upwind_advance.Po
 
 .cpp.o:
 	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
