@@ -1,4 +1,14 @@
 #!/bin/tcsh
+
+if ( $1 =~ "" || ($1 !~ "tec" && $1 !~ "visit") ) then
+  echo "Wrong syntax!"
+  echo "./verify.sh tec    -> use tecplot for visualization"
+  echo "./verify.sh visit  -> use visit for visualization"
+  exit
+endif
+
+echo $1
+
 ### Files requred: *.txt *.gth *.stl, main*.cpp *.gnu *.lay
 
 rm -rf Result_tmp
@@ -29,15 +39,23 @@ echo $difft sec.
 cat log.txt |grep totalvol > vol.out
 cp ../../vol.gnu .
 gnuplot vol.gnu >& /dev/null
-# tecplot
+
 cp ../../zalesak.gth .
 gather.exe < zalesak.gth >& /dev/null
-# cp ../../make_png.mcr .
-# cp ../../zalesak.lay .
-# foreach i (*.plt)
-#   tec360 zalesak.lay -b make_png.mcr $i >& /dev/null
-#   mv tmp.png $i:r.png
-# end
+  
+if ( $1 =~ "tec" ) then
+  # tecplot     
+  cp ../../make_png.mcr .
+  cp ../../zalesak.lay .
+  foreach i (*.plt)
+    tec360 zalesak.lay -b make_png.mcr $i >& /dev/null
+    mv tmp.png $i:r.png
+  end
+else
+  # Visit
+  cp ../../zalesak.py .
+  visit -cli -nowin -s zalesak.py
+endif
 cd ../../..
 
 echo '##W##################'
@@ -58,15 +76,23 @@ echo $difft sec.
 cat log.txt |grep totalvol > vol.out
 cp ../../vol.gnu .
 gnuplot vol.gnu >& /dev/null
-# tecplot
+
 cp ../../circleVortex.gth .
 gather.exe < circleVortex.gth >& /dev/null
-cp ../../make_png.mcr .
-cp ../../circleVortex.lay .
-foreach i (*.plt)
-  tec360 circleVortex.lay -b make_png.mcr $i >& /dev/null
-  mv tmp.png $i:r.png
-end
+
+if ( $1 =~ "tec" ) then
+  # tecplot
+  cp ../../make_png.mcr .
+  cp ../../circleVortex.lay .
+  foreach i (*.plt)
+    tec360 circleVortex.lay -b make_png.mcr $i >& /dev/null
+    mv tmp.png $i:r.png
+  end
+else
+  # Visit
+  cp ../../circleVortex.py .
+  visit -cli -nowin -s circleVortex.py
+endif
 cd ../../..
 
 echo '###################'
@@ -87,15 +113,23 @@ echo $difft sec.
 cat log.txt |grep totalvol > vol.out
 cp ../../vol.gnu .
 gnuplot vol.gnu >& /dev/null
-# tecplot
+
 cp ../../cornerFlow.gth .
 gather.exe < cornerFlow.gth >& /dev/null
-cp ../../make_png.mcr .
-cp ../../cornerFlow.lay .
-foreach i (*.plt)
-  tec360 cornerFlow.lay -b make_png.mcr $i >& /dev/null
-  mv tmp.png $i:r.png
-end
+
+if ( $1 =~ "tec" ) then
+  # tecplot
+  cp ../../make_png.mcr .
+  cp ../../cornerFlow.lay .
+  foreach i (*.plt)
+    tec360 cornerFlow.lay -b make_png.mcr $i >& /dev/null
+    mv tmp.png $i:r.png
+  end
+else
+  # Visit
+  cp ../../cornerFlow.py .
+  visit -cli -nowin -s cornerFlow.py
+endif
 cd ../../..
 
 echo '################################'
@@ -116,17 +150,34 @@ echo $difft sec.
 cat log.txt |grep totalvol > vol.out
 cp ../../vol.gnu .
 gnuplot vol.gnu >& /dev/null
-# tecplot 1
+
 cp ../../slidingSphare.gth .
 gather.exe < slidingSphare.gth >& /dev/null
-cp ../../make_png.mcr .
-cp ../../slidingSphareWall-cont.lay .
-tec360 slidingSphareWall-cont.lay -b make_png.mcr >& /dev/null
-mv tmp.png slidingSphareWall-cont.png
-# tecplot 2
-cp ../../slidingSphareWall-iso.lay .
-tec360 slidingSphareWall-iso.lay -b make_png.mcr >& /dev/null
-mv tmp.png slidingSphareWall-iso.png
+
+if ( $1 =~ "tec" ) then
+  # tecplot 1
+  cp ../../make_png.mcr .
+  cp ../../slidingSphareWall-cont.lay .
+  tec360 slidingSphareWall-cont.lay -b make_png.mcr >& /dev/null
+  mv tmp.png slidingSphareWall-cont.png
+else  
+  # Visit 1
+  cp ../../slidingSphareWall-cont.py .
+  visit -cli -nowin -s slidingSphareWall-cont.py
+  mv visit0000.png slidingSphareWall-cont.png 
+endif
+
+if ( $1 =~ "tec" ) then 
+  # tecplot 2
+  cp ../../slidingSphareWall-iso.lay .
+  tec360 slidingSphareWall-iso.lay -b make_png.mcr >& /dev/null
+  mv tmp.png slidingSphareWall-iso.png
+else
+  # Visit 2
+  cp ../../slidingSphareWall-iso.py .
+  visit -cli -nowin -s slidingSphareWall-iso.py
+  mv visit0000.png slidingSphareWall-iso.png
+endif
 cd ../../..
 
 echo '##############################'
