@@ -22,10 +22,6 @@ main(int argc, char * argv[]) {
 
   boil::timer.start();
 
-  boil::oout<<"Edit cipcsl2_sharpen.cpp!\n";
-  boil::oout<<"#if 1 (for 1D)\n";
-  boil::oout<<"%Boil < input.txt > log.txt \n";
-
   /*--------------------------------+
   |  choose the output file format  |
   +--------------------------------*/
@@ -137,8 +133,14 @@ main(int argc, char * argv[]) {
   +--------------------*/
   // read from file
   real xi[200],tprin[200];
-  for(int i=0; i<200; i++){
-    std::cin>>xi[i]>>tprin[i];
+  std::fstream input;
+  input.open("input.txt");
+  if( input.fail() ) {
+      boil::oout<<"Error: input.txt is necesarry!!!";
+  } else {
+    for(int i=0; i<200; i++){
+      input>>xi[i]>>tprin[i];
+    }
   }
   real xint=2.0e-4;
   // color function

@@ -1,5 +1,4 @@
 #include "vof.h"
-#define ORDER_1st
 
 /******************************************************************************/
 void VOF::insert_bc_norm_cc(const Scalar & val) {
@@ -105,7 +104,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
             mzZ = copysign(1.0,+(val[ii][j][k+1]-val[ii][j][k-1]));
             normalize(mxZ,myZ,mzZ);
 
-            selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,ii,j,k);
+            selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,ii,j,k);
           }
         }
         if(d == Dir::imax()){
@@ -132,7 +131,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
             mzZ = copysign(1.0,+(val[ii][j][k+1]-val[ii][j][k-1]));
             normalize(mxZ,myZ,mzZ);
 
-            selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,ii,j,k);
+            selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,ii,j,k);
           }
         }
         if(d == Dir::jmin()){
@@ -159,7 +158,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
             mzZ = copysign(1.0,+(val[i][jj][k+1]-val[i][jj][k-1]));
             normalize(mxZ,myZ,mzZ);
 
-            selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,jj,k);
+            selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,jj,k);
           }
         }
         if(d == Dir::jmax()){
@@ -186,7 +185,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
             mzZ = copysign(1.0,+(val[i][jj][k+1]-val[i][jj][k-1]));
             normalize(mxZ,myZ,mzZ);
 
-            selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,jj,k);
+            selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,jj,k);
           }
         }
         if(d == Dir::kmin()){
@@ -213,7 +212,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
             mzZ = copysign(1.0,+(val[i][j][kk+1]-val[i][j][kk  ]));
             normalize(mxZ,myZ,mzZ);
 
-            selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,kk);
+            selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,kk);
           }
         }
         if(d == Dir::kmax()){
@@ -240,7 +239,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
             mzZ = copysign(1.0,+(val[i][j][kk  ]-val[i][j][kk-1]));
             normalize(mxZ,myZ,mzZ);
 
-            selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,kk);
+            selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,kk);
           }
         }
       }
@@ -317,7 +316,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
       mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k-1]));
       normalize(mxZ,myZ,mzZ);
 
-      selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+      selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
     }
   }
 
@@ -349,7 +348,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
       mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k-1]));
       normalize(mxZ,myZ,mzZ);
 
-      selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+      selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
     }
   }
 
@@ -381,7 +380,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
       mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k]));
       normalize(mxZ,myZ,mzZ);
 
-      selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+      selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
     }
   }
 
@@ -413,7 +412,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
       mzZ = copysign(1.0,+(val[i][j][k]-val[i][j][k-1]));
       normalize(mxZ,myZ,mzZ);
 
-      selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+      selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
     }
   }
 
@@ -445,7 +444,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
       mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k-1]));
       normalize(mxZ,myZ,mzZ);
 
-      selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+      selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
     }
   }
 
@@ -477,7 +476,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
       mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k-1]));
       normalize(mxZ,myZ,mzZ);
 
-      selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+      selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
     }
   }
 
@@ -509,7 +508,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
       mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k]));
       normalize(mxZ,myZ,mzZ);
 
-      selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+      selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
     }
   }
 
@@ -541,7 +540,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
       mzZ = copysign(1.0,+(val[i][j][k]-val[i][j][k-1]));
       normalize(mxZ,myZ,mzZ);
 
-      selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+      selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
     }
   }
 
@@ -573,7 +572,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
       mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k]));
       normalize(mxZ,myZ,mzZ);
 
-      selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+      selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
     }
   }
 
@@ -605,7 +604,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
       mzZ = copysign(1.0,+(val[i][j][k]-val[i][j][k-1]));
       normalize(mxZ,myZ,mzZ);
 
-      selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+      selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
     }
   }
 
@@ -637,7 +636,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
       mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k]));
       normalize(mxZ,myZ,mzZ);
 
-      selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+      selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
     }
   }
 
@@ -669,7 +668,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
       mzZ = copysign(1.0,+(val[i][j][k]-val[i][j][k-1]));
       normalize(mxZ,myZ,mzZ);
 
-      selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+      selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
     }
   }
 
@@ -702,7 +701,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
     mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k]));
     normalize(mxZ,myZ,mzZ);
 
-    selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+    selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
   }
 
   /* corner i-max & j-min & k-max */
@@ -734,7 +733,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
       mzZ = copysign(1.0,+(val[i][j][k]-val[i][j][k-1]));
       normalize(mxZ,myZ,mzZ);
 
-      selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+      selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
   }
 
   /* corner i-min & j-min & k-min */
@@ -766,7 +765,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
     mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k]));
     normalize(mxZ,myZ,mzZ);
 
-    selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+    selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
   }
 
   /* corner i-min & j-min & k-max */
@@ -798,7 +797,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
     mzZ = copysign(1.0,+(val[i][j][k]-val[i][j][k-1]));
     normalize(mxZ,myZ,mzZ);
 
-    selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+    selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
   }
 
   /* corner i-min & j-max & k-min */
@@ -830,7 +829,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
     mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k]));
     normalize(mxZ,myZ,mzZ);
 
-    selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+    selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
   }
 
   /* corner i-min & j-max & k-max */
@@ -862,7 +861,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
     mzZ = copysign(1.0,+(val[i][j][k]-val[i][j][k-1]));
     normalize(mxZ,myZ,mzZ);
 
-    selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+    selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
   }
 
   /* corner i-max & j-min & k-min */
@@ -894,7 +893,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
     mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k]));
     normalize(mxZ,myZ,mzZ);
 
-    selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+    selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
   }
 
   /* corner i-max & j-min & k-max */
@@ -926,7 +925,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
     mzZ = copysign(1.0,+(val[i][j][k]-val[i][j][k-1]));
     normalize(mxZ,myZ,mzZ);
 
-    selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+    selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
   }
 
   /* corner i-max & j-max & k-min */
@@ -958,7 +957,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
     mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k]));
     normalize(mxZ,myZ,mzZ);
 
-    selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+    selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
   }
 
   /* corner i-max & j-max & k-max */
@@ -990,7 +989,7 @@ void VOF::insert_bc_norm_cc(const Scalar & val) {
     mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k-1]));
     normalize(mxZ,myZ,mzZ);
 
-    selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+    selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
   }
 }
 
@@ -1049,7 +1048,7 @@ void VOF::norm_cc_imin(const Scalar & val,
   mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k-1]));
   normalize(mxZ,myZ,mzZ);
 
-  selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+  selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
 }
 
 /******************************************************************************/
@@ -1077,7 +1076,7 @@ void VOF::norm_cc_imax(const Scalar & val,
   mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k-1]));
   normalize(mxZ,myZ,mzZ);
 
-  selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+  selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
 }
 
 /******************************************************************************/
@@ -1105,7 +1104,7 @@ void VOF::norm_cc_jmin(const Scalar & val,
   mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k-1]));
   normalize(mxZ,myZ,mzZ);
 
-  selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+  selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
 }
 
 /******************************************************************************/
@@ -1133,7 +1132,7 @@ void VOF::norm_cc_jmax(const Scalar & val,
   mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k-1]));
   normalize(mxZ,myZ,mzZ);
 
-  selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+  selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
 }
 
 /******************************************************************************/
@@ -1161,7 +1160,7 @@ void VOF::norm_cc_kmin(const Scalar & val,
   mzZ = copysign(1.0,+(val[i][j][k+1]-val[i][j][k]));
   normalize(mxZ,myZ,mzZ);
 
-  selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+  selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
 }
 
 /******************************************************************************/
@@ -1190,7 +1189,7 @@ void VOF::norm_cc_kmax(const Scalar & val,
   mzZ = copysign(1.0,+(val[i][j][k]-val[i][j][k-1]));
   normalize(mxZ,myZ,mzZ);
 
-  selectMax(mxX,myX,mzX,mxY,myY,myY,mxZ,myZ,mzZ,i,j,k);
+  selectMax(mxX,myX,mzX,mxY,myY,mzY,mxZ,myZ,mzZ,i,j,k);
 }
 
 /*-----------------------------------------------------------------------------+

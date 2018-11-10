@@ -1,5 +1,6 @@
 #include "Include/psi-boil.h"
 #include <fstream>
+#define USE_VOF
 
 #define _GNU_SOURCE 1
 #include <fenv.h>
@@ -143,7 +144,12 @@ main(int argc, char * argv[]) {
   +----------------*/
   Krylov * solver = new CG(d, Prec::di());
 
-  VOF conc  (c, g, kappa, 1.0, 1.0, uvw, time, solver);
+#ifdef USE_VOF
+  VOF conc  (c, g, kappa, uvw, time, solver);
+#else
+  CIPCSL2 conc  (c, g, kappa, uvw, time, solver);
+#endif
+
 #if 0
   std::ofstream fout0;
   fout0.open("init-profile.txt");

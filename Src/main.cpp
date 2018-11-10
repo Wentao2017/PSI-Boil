@@ -1,174 +1,189 @@
 #include "Include/psi-boil.h"
-#include <fstream>
 #define USE_VOF
 
-#define _GNU_SOURCE 1
-#include <fenv.h>
-static void __attribute__ ((constructor)) trapfpe(void)
-{
-  /* Enable some exceptions. At startup all exceptions are masked. */
-  feenableexcept(FE_INVALID|FE_DIVBYZERO|FE_OVERFLOW);
-}
-
-
-/* domain dimensions (given by problem) */
-//const real LX =   0.5;
-const real LX =   0.2;
-const real LY =   0.2;
-const real LZ =   0.2;
-
-/* computed parameters */
-//const int NX = 4;
-const int NX = 100;
-const int NY = 100;
-const int NZ = 100;
+/* boundary conditions */
+const real LX = 1.0;
+const int  NX = 200;
 
 /******************************************************************************/
 main(int argc, char * argv[]) {
 
   boil::timer.start();
 
-  /*--------------------------------+
-  |  choose the output file format  |
-  +--------------------------------*/
+  /*------------------+
+  |  plotting format  |
+  +------------------*/
   boil::plot = new PlotTEC();
 
   /*----------+
   |  grid(s)  |
   +----------*/
-  Grid1D gx( Range<real>( 0,LX), NX, Periodic::yes() );
-  Grid1D gy( Range<real>( 0,LY), NY, Periodic::no() );
-  Grid1D gz( Range<real>( -0.25*LZ,0.75*LZ), NZ, Periodic::no() );
+  //Grid1D gx( Range<real>(-0.5*LX,0.5*LX), NX, Periodic::no() );
+  Grid1D gx( Range<real>(0.0,LX), NX, Periodic::no() );
 
   /*---------+
   |  domain  |
   +---------*/
-  Body floor("floor.stl");
-  Domain d(gx, gy, gz, &floor);
-
-  /*-------------------+
-  |  time-integration  |
-  +-------------------*/
-  const int  ndt = 400;
-  const int nint = 100;
-  const real dt  = 0.25 * LX / real(NX);
-  Times time(ndt, dt); 
+  Domain d(gx, gx, gx);
 	
+  /*----------------------+
+  |  physical properties  |
+  +----------------------*/
+  Matter fluid(d);
+
   /*------------------+
   |  define unknowns  |
   +------------------*/
-  Vector uvw(d); // vel
-  Scalar c  (d), g  (d), kappa(d); // concentration
+  Vector uvw(d); // velocity
+  Scalar c(d), g(d) ; // level set
+  Scalar f(d), kappa(d);
 
-  /*-----------------------------+ 
-  |  insert boundary conditions  |
-  +-----------------------------*/
-#if 1
+  c.bc().add( BndCnd( Dir::imin(), BndType::dirichlet(),0.0 ) );
+  c.bc().add( BndCnd( Dir::imax(), BndType::dirichlet(),0.0 ) );
+  c.bc().add( BndCnd( Dir::jmin(), BndType::dirichlet(),0.0 ) );
+  c.bc().add( BndCnd( Dir::jmax(), BndType::dirichlet(),0.0 ) );
+  c.bc().add( BndCnd( Dir::kmin(), BndType::dirichlet(),0.0 ) );
+  c.bc().add( BndCnd( Dir::kmax(), BndType::dirichlet(),0.0 ) );
+
+  f = c.shape();
+
+
   for_m(m) {
-    uvw.bc(m).add( BndCnd( Dir::imin(), BndType::periodic() ) );
-    uvw.bc(m).add( BndCnd( Dir::imax(), BndType::periodic() ) );
-    uvw.bc(m).add( BndCnd( Dir::kmin(), BndType::wall() ) );
-    uvw.bc(m).add( BndCnd( Dir::kmax(), BndType::wall() ) );
-    uvw.bc(m).add( BndCnd( Dir::jmin(), BndType::wall() ) );
-    uvw.bc(m).add( BndCnd( Dir::jmax(), BndType::wall() ) );
+    uvw.bc(m).add( BndCnd( Dir::imin(), BndType::inlet() ) );
+    uvw.bc(m).add( BndCnd( Dir::imax(), BndType::inlet() ) );
+    uvw.bc(m).add( BndCnd( Dir::jmin(), BndType::inlet() ) );
+    uvw.bc(m).add( BndCnd( Dir::jmax(), BndType::inlet() ) );
+    uvw.bc(m).add( BndCnd( Dir::kmin(), BndType::inlet() ) );
+    uvw.bc(m).add( BndCnd( Dir::kmax(), BndType::inlet() ) );
   }
-#endif
-  c.bc().add( BndCnd( Dir::imin(), BndType::periodic() ) );
-  c.bc().add( BndCnd( Dir::imax(), BndType::periodic() ) );
-  c.bc().add( BndCnd( Dir::kmin(), BndType::wall() ) );
-  c.bc().add( BndCnd( Dir::kmax(), BndType::wall() ) );
-  c.bc().add( BndCnd( Dir::jmin(), BndType::wall() ) );
-  c.bc().add( BndCnd( Dir::jmax(), BndType::wall() ) );
 
-  /*--------------------+
-  |  initial condition  |
-  +--------------------*/
-  Comp m=Comp::u();
-  for_vmijk(uvw,m,i,j,k)
-    uvw[m][i][j][k]=1.0;
+  Krylov * solver = new CG(d, Prec::di());
+  int ndt=6000;
+  int nint=200;
+  Times time(ndt, 0.0005); // ndt, dt
 
-  m=Comp::v();
-  for_vmijk(uvw,m,i,j,k)
-    uvw[m][i][j][k]=0.0;
 
-  m=Comp::w();
-  for_vmijk(uvw,m,i,j,k)
-    uvw[m][i][j][k]=0.0;
-  uvw.exchange();
-
-  for_vijk(c,i,j,k) 
-    c[i][j][k] = 0.0;
-
-  const real radius = LZ/4.0 - 0.5*LZ/real(NZ);
-  const real xcent = LX/2.0;
-  const real ycent = LX/2.0;
-  const real zcent = LZ/4.0;
-  for_vijk(c,i,j,k) {
-    real dist=sqrt(pow(c.xc(i)-xcent,2.0)
-                  +pow(c.yc(j)-ycent,2.0)+pow(c.zc(k)-zcent,2.0));
-    if (dist<radius*0.80) {
-      c[i][j][k]=1.0;
-    } else if(dist<radius*1.2) {
-      int mm=10;
-      real x0=d.xn(i);
-      real y0=d.yn(j);
-      real z0=d.zn(k);
-      real ddx=d.dxc(i)/real(mm);
-      real ddy=d.dyc(j)/real(mm);
-      real ddz=d.dzc(k)/real(mm);
-      int itmp=0;
-      for (int ii=0; ii<mm; ii++){
-        for (int jj=0; jj<mm; jj++){
-          for (int kk=0; kk<mm; kk++){
-            real xxc=x0+0.5*ddx+real(ii)*ddx;
-            real yyc=y0+0.5*ddy+real(jj)*ddy;
-            real zzc=z0+0.5*ddz+real(kk)*ddz;
-            real dist=sqrt(pow(xxc-xcent,2.0)
-                          +pow(yyc-ycent,2.0)+pow(zzc-zcent,2.0));
-            if (dist<radius){
-              itmp=itmp+1;
-            }
-          }
-        }
+  real pi=acos(-1.0);
+#if 0
+  /*------------------------+
+  |  divergence-free field  |
+  +------------------------*/
+  real pi=acos(-1.0);
+  for(int i=0; i<uvw.ni(); i++)
+    for(int j=0; j<uvw.nj(); j++)
+      for(int k=0; k<uvw.nk(); k++) {
+        real xx,yy,zz;
+        xx = uvw.xc(Comp::u(),i);
+        yy = uvw.yc(Comp::u(),j);
+        zz = uvw.zc(Comp::u(),k);
+        uvw[Comp::u()][i][j][k] = 2.0*sin(pi*xx)*sin(pi*xx)
+                                * sin(2.0*pi*yy) 
+                                * sin(2.0*pi*zz);
+        xx = uvw.xc(Comp::v(),i);
+        yy = uvw.yc(Comp::v(),j);
+        zz = uvw.zc(Comp::v(),k);
+        uvw[Comp::v()][i][j][k] = -sin(2.0*pi*xx)
+                                * sin(pi*yy)*sin(pi*yy) 
+                                * sin(2.0*pi*zz);
+        xx = uvw.xc(Comp::w(),i);
+        yy = uvw.yc(Comp::w(),j);
+        zz = uvw.zc(Comp::w(),k);
+        uvw[Comp::w()][i][j][k] = -sin(2.0*pi*xx)
+                                * sin(2.0*pi*yy)
+                                * sin(pi*zz)*sin(pi*zz);
       }
-      c[i][j][k]=real(itmp)/real(mm*mm*mm);
+  uvw.exchange_all(); //set periodic boundary condition.
+#endif
+
+  const real radius = 0.15;
+  const real xcent = 0.35;
+  const real ycent = 0.35;
+  const real zcent = 0.35;
+  for_vijk(c,i,j,k) {
+    real xx=c.xc(i);
+    real yy=c.yc(j);
+    real zz=c.zc(k);
+    real dd = -sqrt((xx-xcent)*(xx-xcent)
+                   +(yy-ycent)*(yy-ycent)
+                   +(zz-zcent)*(zz-zcent))+radius;
+    real eps = LX/NX*1.5;
+    if(dd<-eps){
+      c[i][j][k]=0.0;
+    } else if (dd<eps){
+      c[i][j][k]=0.5+dd/(2.0*eps)+1/(2*pi)*sin(pi*dd/eps);
+    } else {
+      c[i][j][k]=1.0;
     }
   }
-  c.bnd_update();
   c.exchange_all();
-  boil::plot->plot(uvw,c, "uvw-c", 0);
-
-
-  /*----------------+
-  |  linear solver  |
-  +----------------*/
-  Krylov * solver = new CG(d, Prec::di());
-
+  /*------------------+
+  |  define a solver  |
+  +------------------*/
+  //LevelSet T(c, f, 1.0, 1.0, uvw, time, solver);
+  //PhaseField T(c, f, 1.0, 1.0, uvw, time, solver);
 #ifdef USE_VOF
   VOF conc  (c, g, kappa, uvw, time, solver);
 #else
   CIPCSL2 conc  (c, g, kappa, uvw, time, solver);
 #endif
   conc.totalvol();
-
+  boil::plot->plot(uvw,c,"uvw-c", 0);
 
   for(time.start(); time.end(); time.increase()) {
 
+    boil::oout << "##################" << boil::endl;
+    boil::oout << "#                 " << boil::endl;
+    boil::oout << "# TIME:      " << time.current_time() << boil::endl;
+    boil::oout << "#                 " << boil::endl;
+    boil::oout << "# TIME STEP: " << time.current_step() << boil::endl;
+    boil::oout << "#                 " << boil::endl;
+    boil::oout << "##################" << boil::endl;
+
+#if 1
+    /*------------------------+
+    |  divergence-free field  |
+    +------------------------*/
+    for(int i=0; i<uvw.ni(); i++)
+      for(int j=0; j<uvw.nj(); j++)
+        for(int k=0; k<uvw.nk(); k++) {
+          real const period=3.0;
+          real coeft = cos(pi*time.current_time()/period);
+          real xx,yy,zz;
+          xx = uvw.xc(Comp::u(),i);
+          yy = uvw.yc(Comp::u(),j);
+          zz = uvw.zc(Comp::u(),k);
+          uvw[Comp::u()][i][j][k] = 2.0*sin(pi*xx)*sin(pi*xx)
+                                  * sin(2.0*pi*yy)
+                                  * sin(2.0*pi*zz) * coeft;
+          xx = uvw.xc(Comp::v(),i);
+          yy = uvw.yc(Comp::v(),j);
+          zz = uvw.zc(Comp::v(),k);
+          uvw[Comp::v()][i][j][k] = -sin(2.0*pi*xx)
+                                  * sin(pi*yy)*sin(pi*yy)
+                                  * sin(2.0*pi*zz) * coeft;
+          xx = uvw.xc(Comp::w(),i);
+          yy = uvw.yc(Comp::w(),j);
+          zz = uvw.zc(Comp::w(),k);
+          uvw[Comp::w()][i][j][k] = -sin(2.0*pi*xx)
+                                  * sin(2.0*pi*yy)
+                                  * sin(pi*zz)*sin(pi*zz) * coeft;
+        }
+    uvw.exchange_all();
+#endif
+
     conc.advance();
     conc.totalvol();
-
-    if(time.current_step() % nint == 0) {
-      boil::plot->plot(uvw, c, "uvw-c",  time.current_step());
+	  
+    if(boil::plot && time.current_step()%nint == 0) {
+      boil::plot->plot(uvw,c,"uvw-c", time.current_step());
     }
-
   }
 
   boil::oout << "finished" << boil::endl;
 
   boil::timer.stop();
   boil::timer.report();
-
 }	
 /*-----------------------------------------------------------------------------+
- '$Id: main-CIPCSL2-1d.cpp,v 1.3 2018/09/26 10:06:18 sato Exp $'/
+ '$Id: main-ls.cpp,v 1.17 2009/07/01 14:18:53 niceno Exp $'/
 +-----------------------------------------------------------------------------*/
