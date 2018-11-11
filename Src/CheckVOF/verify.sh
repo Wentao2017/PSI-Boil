@@ -17,7 +17,6 @@ endif
 echo $1
 echo $2
 
-exit
 
 ### Files requred: *.txt *.gth *.stl, main*.cpp *.gnu *.lay
 
@@ -64,7 +63,7 @@ if ( $1 =~ "tec" ) then
 else
   # Visit
   cp ../../zalesak.py .
-  visit -cli -nowin -s zalesak.py
+  visit -cli -nowin -s zalesak.py >& /dev/null
 endif
 cd ../../..
 
@@ -101,7 +100,7 @@ if ( $1 =~ "tec" ) then
 else
   # Visit
   cp ../../circleVortex.py .
-  visit -cli -nowin -s circleVortex.py
+  visit -cli -nowin -s circleVortex.py >& /dev/null
 endif
 cd ../../..
 
@@ -138,7 +137,7 @@ if ( $1 =~ "tec" ) then
 else
   # Visit
   cp ../../cornerFlow.py .
-  visit -cli -nowin -s cornerFlow.py
+  visit -cli -nowin -s cornerFlow.py >& /dev/null
 endif
 cd ../../..
 
@@ -173,7 +172,7 @@ if ( $1 =~ "tec" ) then
 else  
   # Visit 1
   cp ../../slidingSphareWall-cont.py .
-  visit -cli -nowin -s slidingSphareWall-cont.py
+  visit -cli -nowin -s slidingSphareWall-cont.py >& /dev/null
   mv visit0000.png slidingSphareWall-cont.png 
 endif
 
@@ -185,7 +184,7 @@ if ( $1 =~ "tec" ) then
 else
   # Visit 2
   cp ../../slidingSphareWall-iso.py .
-  visit -cli -nowin -s slidingSphareWall-iso.py
+  visit -cli -nowin -s slidingSphareWall-iso.py >& /dev/null
   mv visit0000.png slidingSphareWall-iso.png
 endif
 cd ../../..
@@ -224,10 +223,10 @@ if ( $1 =~ "tec" ) then
 else
   # Visit
   cp ../../slidingSphareIB-cont.py .
-  visit -cli -nowin -s slidingSphareIB-cont.py
+  visit -cli -nowin -s slidingSphareIB-cont.py >& /dev/null
   mv visit0000.png slidingSphareIB-cont.png
   cp ../../slidingSphareIB-iso.py .
-  visit -cli -nowin -s slidingSphareIB-iso.py
+  visit -cli -nowin -s slidingSphareIB-iso.py >& /dev/null
   mv visit0000.png slidingSphareIB-iso.png
 endif
 cd ../../..
@@ -263,7 +262,7 @@ if ( $1 =~ "tec" ) then
 else
   # visit
   cp ../../1D-stefan.py .
-  visit -cli -nowin -s 1D-stefan.py
+  visit -cli -nowin -s 1D-stefan.py >& /dev/null
   mv visit0000.png 1D-stefan.png
 endif
 cd ../../..
@@ -300,7 +299,7 @@ if ( $1 =~ "tec" ) then
 else
   # visit
   cp ../../1D-sucking.py .
-  visit -cli -nowin -s 1D-sucking.py
+  visit -cli -nowin -s 1D-sucking.py >& /dev/null
   mv visit0000.png 1D-sucking.png
 endif
 cd ../../..
@@ -338,7 +337,7 @@ if ( $1 =~ "tec" ) then
 else
   # visit
   cp ../../tension2D.py .
-  visit -cli -nowin -s tension2D.py
+  visit -cli -nowin -s tension2D.py >& /dev/null
   mv visit0000.png tension2D.png 
 endif
 cd ../../..
@@ -406,7 +405,7 @@ if ( $2 =~ "sbatch" ) then
   echo 'cp ../../enright.gth .' >> post.sh
   echo 'gather.exe < enright.gth >& /dev/null' >> post.sh
   echo 'cp ../../enright.py .' >>post.sh
-  echo 'visit -cli -nowin -s enright.py' >>post.sh
+  echo 'visit -cli -nowin -s enright.py >& /dev/null' >>post.sh
   chmod 777 post.sh
 else
   mpirun -np 8 Boil > log.txt
@@ -431,7 +430,7 @@ else
   else
     # visit
     cp ../../enright.py .
-    visit -cli -nowin -s enright.py
+    visit -cli -nowin -s enright.py >& /dev/null
   endif
 endif
 cd ../../..
@@ -446,44 +445,69 @@ cd CheckVOF/Result_tmp/RisingBubbleIJNMF
 cp ../../../Boil .
 cp ../../../main.cpp .
 set sec0 = `date +%s`
-mpirun -np 16 Boil > log.txt
-set sec1 = `date +%s`
-@ difft = $sec1 - $sec0
-echo $difft sec.
-# gnuplot
-cat log.txt |grep totalvol > vol.out
-cp ../../vol.gnu .
-gnuplot vol.gnu >& /dev/null
-cat log.txt |grep front > front.out
-cp ../../front-z.gnu .
-gnuplot front-z.gnu >& /dev/null
-cp ../../risingBubble-uvw.gth .
-gather.exe < risingBubble-uvw.gth >& /dev/null
-cp ../../risingBubble-xyz.gth .
-gather.exe < risingBubble-xyz.gth >& /dev/null
-
-if ( $1 =~ "tec" ) then
-  # tecplot
-  cp ../../make_png.mcr .
-  cp ../../risingBubble.lay .
-  tec360 risingBubble.lay -b make_png.mcr >& /dev/null
-  mv tmp.png risingBubble.png
-  cp ../../risingBubble-kappa.lay .
-  tec360 risingBubble-kappa.lay -b make_png.mcr >& /dev/null
-  mv tmp.png risingBubble-kappa.png
-  cp ../../risingBubble-side.lay .
-  tec360 risingBubble-side.lay -b make_png.mcr >& /dev/null
-  mv tmp.png risingBubble-side.png
+if ( $2 =~ "sbatch" ) then
+  cp ../../go-simple2 .
+  sbatch go-simple2
+  echo '#\!/bin/tcsh' > post.sh
+  echo 'cat log.txt |grep totalvol > vol.out' >>post.sh
+  echo 'cp ../../vol.gnu .' >>post.sh 
+  echo 'gnuplot vol.gnu >& /dev/null' >>post.sh
+  echo 'cat log.txt |grep front > front.out' >>post.sh
+  echo 'cp ../../front-z.gnu .' >>post.sh
+  echo 'gnuplot front-z.gnu >& /dev/null' >>post.sh
+  echo 'cp ../../risingBubble-uvw.gth .' >>post.sh
+  echo 'gather.exe < risingBubble-uvw.gth >& /dev/null' >>post.sh
+  echo 'cp ../../risingBubble-xyz.gth .' >>post.sh
+  echo 'gather.exe < risingBubble-xyz.gth >& /dev/null' >>post.sh
+  echo 'cp ../../risingBubble-kappa.py .' >>post.sh
+  echo 'visit -cli -nowin -s risingBubble-kappa.py >& /dev/null' >>post.sh
+  echo 'mv visit0000.png risingBubble-kappa.png' >>post.sh
+  echo 'cp ../../risingBubble.py .' >>post.sh
+  echo 'visit -cli -nowin -s risingBubble.py >& /dev/null' >>post.sh
+  echo 'mv visit0000.png risingBubble.png' >>post.sh
+  echo 'cp ../../risingBubble-side.py .' >>post.sh
+  echo 'visit -cli -nowin -s risingBubble-side.py >& /dev/null' >>post.sh
+  chmod 777 post.sh
 else
-  # visit
-  cp ../../risingBubble-kappa.py .
-  visit -cli -nowin -s risingBubble-kappa.py
-  mv visit0000.png risingBubble-kappa.png
-  cp ../../risingBubble.py .
-  visit -cli -nowin -s risingBubble.py
-  mv visit0000.png risingBubble.png
-  cp ../../risingBubble-side.py .
-  visit -cli -nowin -s risingBubble-side.py
+  mpirun -np 16 Boil > log.txt
+  set sec1 = `date +%s`
+  @ difft = $sec1 - $sec0
+  echo $difft sec.
+  # gnuplot
+  cat log.txt |grep totalvol > vol.out
+  cp ../../vol.gnu .
+  gnuplot vol.gnu >& /dev/null
+  cat log.txt |grep front > front.out
+  cp ../../front-z.gnu .
+  gnuplot front-z.gnu >& /dev/null
+  cp ../../risingBubble-uvw.gth .
+  gather.exe < risingBubble-uvw.gth >& /dev/null
+  cp ../../risingBubble-xyz.gth .
+  gather.exe < risingBubble-xyz.gth >& /dev/null
+
+  if ( $1 =~ "tec" ) then
+    # tecplot
+    cp ../../make_png.mcr .
+    cp ../../risingBubble.lay .
+    tec360 risingBubble.lay -b make_png.mcr >& /dev/null
+    mv tmp.png risingBubble.png
+    cp ../../risingBubble-kappa.lay .
+    tec360 risingBubble-kappa.lay -b make_png.mcr >& /dev/null
+    mv tmp.png risingBubble-kappa.png
+    cp ../../risingBubble-side.lay .
+    tec360 risingBubble-side.lay -b make_png.mcr >& /dev/null
+    mv tmp.png risingBubble-side.png
+  else
+    # visit
+    cp ../../risingBubble-kappa.py .
+    visit -cli -nowin -s risingBubble-kappa.py >& /dev/null
+    mv visit0000.png risingBubble-kappa.png
+    cp ../../risingBubble.py .
+    visit -cli -nowin -s risingBubble.py >& /dev/null
+    mv visit0000.png risingBubble.png
+    cp ../../risingBubble-side.py .
+    visit -cli -nowin -s risingBubble-side.py >& /dev/null
+  endif
 endif
 cd ../../..
 
